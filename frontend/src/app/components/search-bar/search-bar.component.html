@@ -1,0 +1,105 @@
+<div 
+  class="search-container mb-4" 
+  [class.scrolled]="isScrolled"
+  [class.on-discover]="isOnDiscoverSection"
+  style="z-index: 20;">
+
+  <div class="row w-100">
+    <div class="col-2 d-flex justify-content-center align-items-center logo">
+      <a [routerLink]="['/']">
+        <img
+          src="/assets/logo-no-back.svg"
+          alt="logo-no-background"
+          class="img-fluid align-self-start"
+          width="50px"
+        />
+      </a>
+    </div>
+    <div class="search-bar col-10 d-flex justify-content-center align-items-center">
+      <div class="input-group">
+        <!-- Bottone Switch Modalità -->
+        <button
+          class="btn switcher"
+          (click)="toggleMode()"
+          aria-label="Toggle Search Mode"
+        >
+          <ng-container *ngIf="selectedMode === 'cocktails'">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width: 30px; height: 30px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3h10.5M6.75 3l1.5 15a1.5 1.5 0 001.49 1.35h4.52a1.5 1.5 0 001.49-1.35l1.5-15M6.75 3h10.5M8.25 8h7.5"/>
+            </svg>
+          </ng-container>
+          <ng-container *ngIf="selectedMode === 'places'">
+            <ng-icon name="heroMapPinSolid" style="width: 25px; height: 25px; color: white;"></ng-icon>
+          </ng-container>
+        </button>
+    
+        <!-- Campo di input per la ricerca -->
+        <input
+          type="text"
+          class="form-control search-input"
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+          [placeholder]="selectedMode === 'cocktails' ? 'Search cocktails...' : 'Search places...'"
+        />
+    
+        <!-- Bottone per i filtri -->
+        <button
+          *ngIf="selectedMode === 'cocktails'"
+          class="btn btn-filters"
+          (click)="toggleFilters()"
+          aria-expanded="false"
+          aria-controls="filtersCollapse"
+        >
+          <ng-icon name="heroAdjustmentsHorizontal" style="width: 20px; height: 20px;"></ng-icon>
+        </button>
+      </div>
+      <!-- Filtri per i cocktail -->
+      <div *ngIf="!isCollapsed && selectedMode === 'cocktails'" class="filters card card-body">
+        <div class="filter mb-2">
+          <label for="category">Categories</label>
+          <select
+            id="category"
+            class="form-control"
+            [(ngModel)]="selectedCategory"
+            (change)="onSearch()"
+          >
+            <option value="">All</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+    
+        <div class="filter mb-2">
+          <label for="ingredient">Ingredients</label>
+          <select
+            id="ingredient"
+            class="form-control"
+            [(ngModel)]="selectedIngredient"
+            (change)="onSearch()"
+          >
+            <option value="">All</option>
+            <option *ngFor="let ingredient of ingredients" [value]="ingredient">
+              {{ ingredient }}
+            </option>
+          </select>
+        </div>
+    
+        <div class="filter mb-2">
+          <label for="glass">Glasses</label>
+          <select
+            id="glass"
+            class="form-control"
+            [(ngModel)]="selectedGlass"
+            (change)="onSearch()"
+          >
+            <option value="">All</option>
+            <option *ngFor="let glass of glasses" [value]="glass">
+              {{ glass }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

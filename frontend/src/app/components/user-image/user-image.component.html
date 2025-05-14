@@ -1,0 +1,6 @@
+<div [ngStyle]="{ 'background-color': getColorForUser() }" class="user-initial" [ngClass]="size">
+    <!-- Se l'utente ha un'immagine, mostra l'immagine; altrimenti, mostra l'iniziale -->
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="User Image" class="img-fluid rounded-circle" />
+    <span *ngIf="!imageUrl">{{ userInitial }}</span>
+  </div>
+  

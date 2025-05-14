@@ -1,0 +1,50 @@
+.place-details {
+    padding-top: 100px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .photo-container {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    overflow: hidden;
+    height: 250px;
+    width: 250px;
+
+  }
+  
+  .photo-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s;
+    border-radius: 0.25rem;
+  }
+  
+  .photo-container a:hover img {
+    opacity: 0.9;
+  }
+
+
+  
+  /* Keep only used styles from above and remove these unused ones */
+  .info-card {
+    display: none;
+  }
+  
+  .place-types {
+    display: none;
+  }
+  
+  @media (max-width: 767.98px) {
+    .place-details {
+      width: 95%;
+    }
+    
+    .cocktail-reviews h3 {
+      font-size: 1.5rem;
+    }
+  } 

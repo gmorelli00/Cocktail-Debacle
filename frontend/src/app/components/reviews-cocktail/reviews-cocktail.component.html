@@ -1,0 +1,65 @@
+<!-- Places Reviews Section -->
+<div class="places-section mt-5">
+<h3 class="text-center mb-4">Where to find this cocktail near you</h3>
+
+<!-- Location error message -->
+<div *ngIf="locationError" class="alert alert-warning my-3">
+    {{ locationError }}
+</div>
+
+<!-- Loading indicator for reviews -->
+<div *ngIf="reviewsLoading" class="text-center py-3">
+    <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading nearby places...</span>
+    </div>
+</div>
+
+<!-- No reviews message -->
+<div *ngIf="!reviewsLoading && placeReviews.length === 0" class="text-center py-3">
+    <p class="text-muted">No places serving this cocktail found near your location.</p>
+</div>
+
+<!-- Reviews grid -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let place of placeReviews" class="col">
+    <div class="card h-100 place-card" (click)="navigateToPlace(place.googlePlaceId)">
+        <!-- Loading state -->
+        <div *ngIf="place.loading" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        </div>
+        
+        <!-- Error state -->
+        <div *ngIf="!place.loading && place.error" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+        <div class="text-muted">Place details not available</div>
+        </div>
+        
+        <!-- Image -->
+        <img *ngIf="!place.loading && !place.error && place.photoUrl" 
+            [src]="place.photoUrl" 
+            class="card-img-top place-image" 
+            alt="{{ place.name || 'Place' }}">
+        
+        <!-- No image placeholder -->
+        <div *ngIf="!place.loading && !place.error && !place.photoUrl" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+        <div class="text-muted">No image available</div>
+        </div>
+        
+        <div class="card-body">
+        <h5 class="card-title">{{ place.name || 'Unknown Place' }}</h5>
+        <p class="card-text text-muted small mb-2">{{ place.address || 'No address available' }}</p>
+        <div class="review-summary mt-3 text-center">
+            <div class="rating-stars mb-1">
+              <span class="stars">{{ getStarRating(place.averageScore) }}</span>
+              <span class="average ms-1">{{ place.averageScore.toFixed(1) }}</span>
+            </div>
+            <div class="review-count small text-muted">
+              {{ place.reviewCount }} {{ place.reviewCount === 1 ? 'review' : 'reviews' }}
+            </div>
+          </div>          
+        </div>
+    </div>
+    </div>
+</div>
+</div>

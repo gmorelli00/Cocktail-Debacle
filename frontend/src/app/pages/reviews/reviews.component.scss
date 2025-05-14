@@ -1,0 +1,220 @@
+.place-details {
+  padding: 1rem 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.photo-container {
+  margin-bottom: 1rem;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+.photo-container img {
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+  transition: opacity 0.2s;
+  border-radius: 0.25rem;
+}
+
+.no-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background-color: #e9ecef;
+  color: #6c757d;
+  font-size: 1.2rem;
+  border-radius: 0.25rem;
+}
+
+.cocktail-details {
+  padding: 1rem 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cocktail-image-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  min-height: 150px;
+}
+
+.cocktail-image {
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.reviews-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stars {
+  color: #ffc107;
+  letter-spacing: 1px;
+}
+
+.rating-value {
+  font-weight: bold;
+}
+
+.review-card {
+  transition: transform 0.2s;
+  border-left: 4px solid #007bff;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-comment {
+  white-space: pre-line;
+}
+
+@media (max-width: 767px) {
+  .place-details,
+  .cocktail-details,
+  .reviews-section {
+    width: 95%;
+  }
+  
+  .cocktail-details h3,
+  .reviews-section h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.review-form {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+.rating-selector {
+  display: flex;
+  align-items: center;
+  
+  .btn-group {
+    .btn {
+      min-width: 40px;
+    }
+  }
+  
+  .star-rating {
+    display: flex;
+    
+    .star-btn {
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      
+      .star {
+        font-size: 24px;
+        color: #ccc;
+      }
+      
+      &:hover {
+        transform: scale(1.15);
+        
+        .star {
+          color: #ffc107;
+        }
+      }
+      
+      &.selected {
+        .star {
+          color: #ffc107;
+        }
+      }
+    }
+  }
+}
+
+.stars {
+  color: #ffc107;
+  letter-spacing: 2px;
+}
+
+.reviews-section {
+  margin-bottom: 3rem;
+}
+
+/* Animation for the review form */
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.review-form {
+  animation: slideDown 0.3s ease-out;
+}
+
+// Add styling for review actions
+.review-actions {
+  transition: opacity 0.2s ease;
+  
+  button {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Edit form styling
+.edit-review-form {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+// Delete confirmation
+.delete-confirm {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.user-profile-link {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 20px;
+  
+  &:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+}

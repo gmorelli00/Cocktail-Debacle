@@ -1,0 +1,170 @@
+/* Overlay che copre tutta la pagina */
+.navbar {
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f5;
+  top: 0;
+  max-width: 80px;
+  height: 100vh;
+  &.btn {
+    display: flex;
+    align-items: center;
+  }
+}
+.gap {
+  gap: 10px;
+}
+
+.overlay {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+/* Il form di login sarà centrato nell'overlay */
+.card {
+  z-index: 500;
+  background-color: #f0f0f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0.4, 0.4, 0.4, 0.4);
+  max-width: 400px;
+  width: 100%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.user-initial {
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+}
+
+.dropdown-item {
+  background-color: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    max-width: 100%;
+    height: auto;
+    height: 70px!important;
+    top: auto!important;
+    bottom: 0!important;
+    left: 0!important;
+    right: 0!important;
+    padding: auto;
+    margin: 0!important;
+    flex-direction: row!important;
+    align-items: center;
+    display: flex!important;
+    justify-content:center!important;
+    flex-wrap: nowrap;
+    box-sizing: border-box!important;
+    box-shadow: 0 -4px 20px -10px rgba(0, 0, 0, 0.1)!important;
+    .row {
+      flex-direction: row!important;
+      width: fit-content!important;
+      margin: 0!important;
+      box-sizing: border-box!important;
+      .col {
+        padding: auto!important;
+        margin: 0!important;
+        justify-content: center!important;
+        @media (min-width: 769px) {
+          flex: 0 0 100%;
+          max-width: 100%!important;
+          width: 100%!important;
+        }
+      }
+    }
+    .logo,
+    .home-icon {
+      display: none!important;
+    }
+
+    .top-navbar {
+      flex-direction: row!important;
+      width: 80%!important;
+      .btn {
+        margin: 0!important;
+      }
+    }
+    .bottom-navbar {
+      flex-direction: row!important;
+      justify-content: center!important;
+      align-items: center!important;
+      width: 20%!important;
+      display: block!important;
+      .col {
+        justify-content: center!important;
+      }
+      .dropdown, .btn {
+        // border: 2px solid red!important;
+        transform: scale(0.85)!important;
+        margin-bottom: 4px!important;
+      }
+    }
+  }
+
+  .overlay {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-form-container {
+    width: 90%;
+  }
+  
+}
+
+@media (max-width: 767px) {
+  .overlay {
+    height: 100%!important;
+    width: 100%!important;
+  }
+  .card {
+    top: 0!important;
+    width: 100%!important;
+    height: 100%!important;
+    overflow: scroll!important;
+    max-height: 100%!important;
+    margin-bottom: 70px!important;
+    max-width: 100%!important;
+    border-radius: 0!important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-menu {
+    top: -140px!important;
+    left: -110px!important;
+  }
+}
+  

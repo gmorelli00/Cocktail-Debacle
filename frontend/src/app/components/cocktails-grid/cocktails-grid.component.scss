@@ -1,0 +1,74 @@
+$cocktail-radius: 8px;
+$cocktail-overlay-gradient: linear-gradient(
+  to top,
+  rgba(0, 0, 0, 0.9) 0%,
+  rgba(0, 0, 0, 0.7) 40%,
+  rgba(0, 0, 0, 0.4) 70%,
+  rgba(0, 0, 0, 0) 100%
+);
+$cocktail-text-color: #fff;
+
+
+.cocktail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-auto-rows: 300px;
+  gap: 2rem;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.cocktail-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: $cocktail-radius;
+
+
+  &:hover {
+    transform: scale(1.05); /* Leggero ingrandimento all'hover */
+  }
+
+  a.image-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+
+    img.cocktail-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: $cocktail-radius;
+      display: block;
+    }
+
+    .cocktail-name-overlay {
+      position: absolute;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .favorite-icon-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: auto;
+      cursor: pointer;
+
+      ng-icon {
+        width: 22px;
+        height: 22px;
+        color: $cocktail-text-color;
+      }
+    }
+  }
+}
+.recommended-label {
+  font-size: 0.75rem!important;
+  font-weight: 600!important;
+  text-transform: uppercase!important;
+  background: linear-gradient(45deg, #d5710e, #dab603);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

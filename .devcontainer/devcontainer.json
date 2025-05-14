@@ -1,0 +1,11 @@
+{
+    "name": "Cocktail Backend Dev",
+    "context": "..",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "backend",
+    "workspaceFolder": "/src",
+    "settings": {
+      "terminal.integrated.defaultProfile.linux": "bash"
+    },
+    "postCreateCommand": "dotnet restore"
+  }

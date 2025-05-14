@@ -1,0 +1,87 @@
+<div class="register-form position-relative p-3">
+    <!-- Pulsante X -->
+    <button 
+      class="x-button position-absolute top-0 end-0 m-2 border-0 bg-transparent" 
+      (click)="closeRegister()"
+      style="z-index: 10;">
+      <ng-icon name="heroXMark" class="text-green-500" style="width: 30px; height: 30px;"></ng-icon>
+    </button>
+  
+    <h3>Register</h3>
+
+    <!-- Display error message if any -->
+    <div *ngIf="error()" class="alert alert-danger">
+      {{ error() }}
+    </div>
+
+    <!-- Form di registrazione -->
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required />
+      </div>
+  
+      <div class="form-group mt-2">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required />
+      </div>
+  
+      <div class="form-group mt-2">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+      </div>
+
+      <div class="form-check mt-3">
+        <input type="checkbox" id="consentData" class="form-check-input" [(ngModel)]="consentData" name="consentData" required />
+        <label for="consentData" class="form-check-label">
+          I consent to the collection of my data
+        </label>
+      </div>
+
+      <div class="form-check mt-3">
+        <input type="checkbox" id="consentSuggestions" class="form-check-input" [(ngModel)]="consentSuggestions" name="consentSuggestions" required />
+        <label for="consentSuggestions" class="form-check-label">
+          I agree to receive personalized suggestions
+        </label>
+      </div>
+
+  
+      <button 
+        type="submit" 
+        class="btn btn-success mt-3 w-100" 
+        [disabled]="!acceptedTerms || !acceptedPrivacy">
+        Register
+      </button>
+      <div class="text-center mt-3">
+        <p class="text-muted">By registering, you agree to our 
+          <a href="#" class="text-decoration-none">Terms of Service</a> and 
+          <a href="#" class="text-decoration-none">Privacy Policy</a>.
+        </p>
+      </div>
+    </form>
+    <!-- Divider -->
+<div class="text-center my-3">
+    <span class="text-muted">or</span>
+  </div>
+  
+  <!-- Bottone Google -->
+<button (click)="loginWithGoogle()" type="button" 
+  class="btn w-100 d-flex align-items-center justify-content-center gap-2 px-3 py-2 border rounded-pill shadow-sm"
+  style="background-color: white; border-color: #ddd;">
+  <img src="/assets/google.svg" alt="Google logo" width="20" height="20">
+  <span class="text-dark fw-medium">Continue with Google</span>
+</button>
+  
+  
+    <!-- Cambia a login -->
+    <div class="text-center mt-3">
+      <p class="text-muted">Already have an account?</p>
+      <button (click)="switchToLoginForm()" class="btn btn-link">Log in</button>
+    </div>
+  </div>
+  

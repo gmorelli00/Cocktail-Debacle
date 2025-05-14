@@ -1,0 +1,966 @@
+{
+	"info": {
+		"_postman_id": "9ebf87b4-28a8-4b06-90b5-3258e32f47a2",
+		"name": "backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39302775"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"goku\",\n    \"email\": \"goku@gmail.com\",\n    \"password\": \"SuperSaiyan3!\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/register/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usernameoremail\": \"goku\",\n    \"password\": \"Supersaiyan3!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/profile/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Google-login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/google-login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"google-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Google-response",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/google-respose",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"google-respose"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Is-logged-in",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/is-logged-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"is-logged-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": \"3\",\n    \"comment\": \"it was majestisc\",\n    \"cocktailid\": \"11003\",\n    \"googleplaceid\": \"ChIJxfaDuaxWKhMRqMKoJPMAND8\",\n    \"name\": \"Love Craft\",\n    \"latitude\": \"43.7692938\",\n    \"longitude\": \"11.2457397\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/reviews/{{review_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"{{review_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/reviews/{{review_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"{{review_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/reviews/{{review_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"{{review_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewPlaceMetadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/reviews/metadata/place/{{google_place_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"metadata",
+								"place",
+								"{{google_place_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewCocktailMetadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/reviews/metadata/cocktail/{{cocktail_id}}?{{location}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"metadata",
+								"cocktail",
+								"{{cocktail_id}}"
+							],
+							"query": [
+								{
+									"key": "{{location}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewPlaceCocktail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reviews/place/{{google_place_id}}/cocktail/{{cocktail_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reviews",
+								"place",
+								"{{google_place_id}}",
+								"cocktail",
+								"{{cocktail_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/reviews/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"reviews",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewPlaceCocktail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api//reviews/place/ChIJxfaDuaxWKhMRqMKoJPMAND8/cocktail/11003url",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"",
+								"reviews",
+								"place",
+								"ChIJxfaDuaxWKhMRqMKoJPMAND8",
+								"cocktail",
+								"11003url"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "places",
+			"item": [
+				{
+					"name": "PlaceSearch",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/places/search?query=Lovecraft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"places",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Lovecraft"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PlacePhoto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/places/photo?photoReference={{photoReference}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"places",
+								"photo"
+							],
+							"query": [
+								{
+									"key": "photoReference",
+									"value": "{{photoReference}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PlaceDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/places/details?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"places",
+								"details"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nearby",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/places/nearby?{{location}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"places",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "{{location}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cocktails",
+			"item": [
+				{
+					"name": "Recommendations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/recommendations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recommendations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Popular",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails/popular",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cocktails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User-cocktails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user-cocktails/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-cocktails",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails/categories",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingredients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails/ingredients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"ingredients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Glasses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails/glasses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"glasses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cocktail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cocktails/{{cocktail_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"{{cocktail_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload-image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1f02f0ec-0175-4e90-ac02-c601bfca0e87"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/cocktails/upload-image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"upload-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"strDrink\":\"medieval\",\"strCategory\":\"medieval\",\"strAlcoholic\":\"medieval\",\"strGlass\":\"medieval\",\"strInstructions\":\"medieval\",\"strDrinkThumb\":\"http://localhost/uploads/435d4924-b35b-45ff-a3fa-e14e74a4394b.jpg\",\"strIngredient1\":\"medieval\",\"strMeasure1\":\"1\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cocktails/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cocktails",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "Favorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites/{{cocktail_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"{{cocktail_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favorites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites/{{cocktail_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"{{cocktail_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"gokussj\",\n    \"email\": \"gokussj@gmail.com\",\n    \"oldpassword\": \"Supersaiyan1!\",\n    \"newpassword\": \"Supersaiyan3!\",\n    \"confirmpassword\": \"Supersaiyan3!\",\n    \"consentdata\": true,\n    \"consentsuggestions\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"Supersaiyan1!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEwMSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJnb2t1IiwianRpIjoiZjA3Y2ExMDQtNWM3Zi00NzA4LWEyMjMtNGYyNjdmZWIyMDgzIiwiZXhwIjoxNzQ3NjQ1MTYwLCJpc3MiOiJDb2NrdGFpbERlYmFjbGVBUEkiLCJhdWQiOiJDb2NrdGFpbERlYmFjbGVGcm9udGVuZCJ9.NJnTQ8lzCwsBiXtdeRPsnuTbjQCshzK7nlRgXM91mA4",
+			"type": "default"
+		},
+		{
+			"key": "cocktail_id",
+			"value": "11000",
+			"type": "default"
+		},
+		{
+			"key": "photoReference",
+			"value": "AeeoHcI_wHb7gQWhQ3hK0FjX0yl7DGhZ2cSqqv0IZbXXj_NRcxKpYpCLYKoiQdgxk6t-ijbv_E5oRwWqqYL3CDc9n6wVnTY0lG3NCZOgG-u9Pye_iP87TPDwT5rh_1LjiHzcV_3vrTQC6nVbrNTLWeikwQ1k98eF0Hh6DBnBGh3iU5_rTLKVE5h23pvKJ7QnDw6NNB9Fov3_mbFlxfbUQeDiMUgYpFx1h-ZOh6x0W0JFWPrJwjiT52TPQN2Pk2GrfMSJiXKOc3mwBi8EU2gSdYCE4NRbfcKBJBxvn2GWaJ_VsdbPYNi1BCM",
+			"type": "default"
+		},
+		{
+			"key": "username",
+			"value": "goku",
+			"type": "string"
+		},
+		{
+			"key": "review_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "google_place_id",
+			"value": "ChIJxfaDuaxWKhMRqMKoJPMAND8",
+			"type": "default"
+		},
+		{
+			"key": "location",
+			"value": "lat=43.76914174542827&lng=11.246123925745271",
+			"type": "default"
+		}
+	]
+}

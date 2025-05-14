@@ -1,0 +1,93 @@
+<div class="container mt-5 position-relative ">
+  <h2 class="mb-4 text-center">Places</h2>
+
+  <!-- GRID DEI RISULTATI DELLA SEARCH -->
+  <div *ngIf="searchTerm"
+       class="search-places-section mt-5">
+       <div class="text-center mb-3">
+        <h5 class="text-muted mb-2">Results</h5>
+      </div>
+    
+      <div *ngIf="isLoading" class="text-center py-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+    <div *ngIf="searchResults.length > 0 && !isLoading" class="place-grid"
+         infiniteScroll
+         [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="displayNextSearchPlaces()">
+
+      <div *ngFor="let place of displayedSearchPlaces" class="text-center">
+
+        <div class="place-card position-relative mx-auto">
+          <a class="image-link d-block position-relative"
+             (click)="goToPlaceDetails(place)">
+            <img class="place-image" [src]="place.photoUrl || fallbackImage"
+                 alt="Place photo" />
+          </a>
+        </div>
+
+        <!-- INFO SOTTO LA CARD -->
+        <div class="place-info text-center">
+          <div class="fw-bold">{{ place.name }}</div>
+          <div class="text-muted small">{{ getFormattedAddress(place) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--       <button class="btn btn-outline-primary uniform-button" (click)="searchNearbyPlaces()" [disabled]="isLoadingNearby">
+          <i class="bi bi-arrow-repeat me-1"></i> Refresh
+        </button> -->
+  <!-- Nearby Places -->
+  <div *ngIf="!searchTerm" class="nearby-places-section mt-5">
+    <div class="text-center mb-3">
+      <h5 class="text-muted mb-2">Nearby Places</h5>
+    </div>
+    
+
+    <div *ngIf="isLoadingNearby" class="text-center py-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading nearby places...</span>
+      </div>
+    </div>
+
+    <div *ngIf="nearbyError" class="alert alert-danger">
+      <p>Error finding nearby places. Please allow location access and try again.</p>
+    </div>
+
+    <div *ngIf="!isLoadingNearby && !nearbyError && displayedNearbyPlaces.length === 0" class="text-center py-3">
+      <p class="text-muted">No places found nearby. Try searching for a specific place.</p>
+    </div>
+
+    <div 
+      class="place-grid"
+      *ngIf="!isLoadingNearby && displayedNearbyPlaces.length > 0"
+      infiniteScroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollThrottle]="150"
+      (scrolled)="displayNextNearbyPlaces()"
+    >
+  
+        <div *ngFor="let place of displayedNearbyPlaces" class="text-center">
+  
+        <div class="place-card position-relative mx-auto">
+          <a (click)="goToPlaceDetails(place)" class="image-link d-block position-relative">
+            <img class="place-image" [src]="place.photoUrl" alt="Place photo" />
+          </a>
+        </div>
+      
+        <!-- INFO SOTTO LA CARD -->
+        <div class="place-info text-center mt-2">
+          <div class="fw-bold">{{ place.name }}</div>
+          <div class="text-muted small">{{ getFormattedAddress(place) }}</div>
+        </div>
+      </div>
+    </div>
+      
+  
+    </div>
+  </div>

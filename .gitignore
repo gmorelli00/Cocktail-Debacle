@@ -1,0 +1,58 @@
+# === ENV & DOCKER ===
+.env
+sqlserverdata/
+docker-compose.override.yml
+
+# === BACKEND (.NET - ASP.NET Core) ===
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/*.db
+backend/*.db-journal
+
+# dotnet artifacts
+backend/Properties/launchSettings.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vscode/
+*.DS_Store
+
+# === FRONTEND (Angular) ===
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.vscode/
+frontend/.history/
+frontend/package-lock.json
+frontend/tmp/
+frontend/out-tsc/
+
+# Angular build outputs
+frontend/bazel-out/
+frontend/.sass-cache/
+frontend/coverage/
+frontend/testem.log
+
+# === IDEs & OS files ===
+.vscode/
+.idea/
+*.log
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db
+npm-debug.log
+yarn-error.log
+
+# === GIT ===
+*.orig
+*.rej
+*.bak
+*.backup
+
+# === SYSTEM FILES ===
+$RECYCLE.BIN/
+Desktop.ini
+ehthumbs.db

@@ -1,0 +1,8 @@
+<div class="cocktail-sorter-container d-flex align-items-center justify-content-center">
+  <label for="sortSelect" class=" me-2 fw-semibold ">Sort by:</label>
+  <select id="sortSelect" class="form-select w-auto" (change)="onSortChange($event)">
+    <option value="name">Name</option>
+    <option value="popularity">Popularity</option>
+    <option value="reviews">Reviews</option>
+  </select>
+</div>

@@ -1,0 +1,22 @@
+<div class="carousel-container text-center mt-5">
+  <button class="arrow-left" (click)="scrollLeft(carousel)">
+    <ng-icon name="heroArrowLeftCircleSolid" style="width: 40px; height: 40px;"></ng-icon>
+  </button>
+  <div class="carousel" #carousel>
+    <div
+      class="carousel-slide"
+      *ngFor="let slide of sliderItems; let i = index"
+    >
+      <ng-container *ngIf="!slide.isDiscover">
+        <!-- Aggiunto click handler -->
+        <div class="carousel-image-container" (click)="navigateToCocktail(slide.id!)" style="cursor: pointer;">
+          <img [src]="slide.image" [alt]="slide.title" />
+          <h5>{{ slide.title }}</h5>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <button class="arrow-right" (click)="scrollRight(carousel)">
+    <ng-icon name="heroArrowRightCircleSolid" style="width: 40px; height: 40px;"></ng-icon>
+  </button>
+</div>

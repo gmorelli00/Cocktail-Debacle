@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Cocktails</h2>
+
+
+  <div  class="sort-container d-flex justify-content-center align-items-center gap-3 mb-4">
+    <app-cocktail-sorter (sortChange)="onSortChange($event)"></app-cocktail-sorter>
+
+    <!-- Toggle “Recommended” visibile solo da loggato -->
+    <div *ngIf="loggedIn && consentSuggestions" class="recommended-switch form-switch">
+      <input
+        type="checkbox"
+        id="recommendedToggle"
+        class="form-check-input"
+        [checked]="showRecommended"
+        (change)="toggleRecommended()">
+      <label for="recommendedToggle" class="form-check-label ms-1">
+        Recommended
+      </label>
+    </div>
+  </div>
+
+  <app-cocktails-grid
+    *ngIf="recommendedReady"
+    [sortType]="currentSort"
+    [recommended]="recommendedCocktails"
+    [showRecommended]="showRecommended"
+    [favoriteUsername]="username"
+    [loggedIn]="loggedIn"
+  ></app-cocktails-grid>
+</div>

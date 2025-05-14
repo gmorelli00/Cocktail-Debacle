@@ -1,0 +1,173 @@
+.review-card {
+  transition: transform 0.2s;
+  border-left: 4px solid #007bff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.review-comment {
+  white-space: pre-line;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+.stars {
+  color: #ffc107;
+  letter-spacing: 1px;
+}
+
+.rating-value {
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: bold;
+}
+
+.review-actions {
+  display: flex;
+  gap: 0.5rem;
+  transition: opacity 0.2s ease;
+
+  button {
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.user-profile-link {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.edit-review-form {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+.delete-confirm {
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+// Animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Rating Selector (Stelle durante l'edit)
+.rating-selector {
+  display: flex;
+  align-items: center;
+  
+  .star-rating {
+    display: flex;
+
+    .star-btn {
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      
+      .star {
+        font-size: 24px;
+        color: #ccc;
+      }
+      
+      &:hover {
+        transform: scale(1.15);
+
+        .star {
+          color: #ffc107;
+        }
+      }
+      
+      &.selected {
+        .star {
+          color: #ffc107;
+        }
+      }
+    }
+  }
+
+  .rating-display {
+    margin-left: 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+}
+
+/* Limita il paragrafo a 3 righe con ellissi */
+/* Commento in modalità “collapsed” (max 3 righe + fade) */
+.review-comment.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;                // serve per il ::after
+
+  /* dissolvenza in fondo */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;                  // alto quanto basta a coprire l’ultima riga
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    pointer-events: none;            // il clic passa al bottone sotto
+  }
+}
+
+/* Bottone “Show more / Show less” minimal */
+/* Bottone “Show more / Show less” */
+.show-more-btn {
+  font-size: 0.875rem;              // piccolino
+  color: #007bff;                   // blu
+  display: block;                   // si comporta da block…
+  width: max-content;               // …ma resta largo quanto il testo
+  margin: 0 auto;                   // centra orizzontalmente
+  text-decoration: none !important; // niente sottolineatura
+
+  &:hover,
+  &:focus {
+    text-decoration: none !important; // nessuna sottolineatura neppure al passaggio/ focus
+  }
+}
+

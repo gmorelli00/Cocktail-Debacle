@@ -1,0 +1,15 @@
+@use './styles/variables' as *;
+
+html, body, app-root {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  min-width: 400px;
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: #f0f0f5;
+}

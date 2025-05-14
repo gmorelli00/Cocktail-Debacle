@@ -1,0 +1,77 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: ${DBPASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./sqlserverdata:/var/opt/mssql
+    networks:
+      - cocktail-net
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=${DBSERVER};Database=${DBDATABASE};User Id=${DBUSERID};Password=${DBPASSWORD};Encrypt=False;TrustServerCertificate=True
+      - Jwt__Key=${JWTKEY}
+      - Jwt__Issuer=${JWTISSUER}
+      - Jwt__Audience=${JWTAUDIENCE}
+      - Authentication__Google__ClientId=${GOOGLECLIENTID}
+      - Authentication__Google__ClientSecret=${GOOGLECLIENTSECRET}
+      - GOOGLE_MAPS_API_KEY=${GOOGLEAPIKEY}
+    volumes:
+      - ./backend:/src
+    working_dir: /src
+    depends_on:
+      - db
+    networks:
+      - cocktail-net
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run start -- --host 0.0.0.0
+    depends_on:
+      - backend
+    networks:
+      - cocktail-net
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/wwwroot:/app/wwwroot
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - cocktail-net
+    restart: always
+
+volumes:
+  sqlserverdata:
+
+networks:
+  cocktail-net:
+    driver: bridge

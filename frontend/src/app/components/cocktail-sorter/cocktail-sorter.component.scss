@@ -1,0 +1,13 @@
+.cocktail-sorter-container {
+  max-width: 300px;
+  margin: 0 auto;
+
+  select.form-select {
+    min-width: 150px;
+    border-radius: 0.375rem;
+  }
+
+  label {
+    white-space: nowrap;
+  }
+}

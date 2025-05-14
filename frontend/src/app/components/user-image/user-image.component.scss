@@ -1,0 +1,34 @@
+.user-initial {
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  &.small {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  
+  &.medium {
+    width: 40px;
+    height: 40px;
+    font-size: 1.0rem;
+  }
+  
+  &.large {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+}
+
+.user-initial img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}

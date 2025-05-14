@@ -1,0 +1,145 @@
+    <!-- Modalità modifica - only visible for own profile -->
+    <div class="settings-container d-flex flex-column container mt-4 mb-5">
+
+      <div class="profile-edit-section px-3 py-4 mt-4 rounded shadow-sm bg-light position-relative">
+
+        <h4 class="mb-4 border-bottom pb-2">Edit Profile</h4>
+
+        <a 
+          [routerLink]="['/profile', currentUsername]" 
+          class="x-button position-absolute top-0 end-0 m-2 border-0 bg-transparent"
+          aria-label="Back to profile">
+          <ng-icon name="heroXMark" class="text-dark" style="width: 30px; height: 30px;"></ng-icon>
+        </a>
+        
+        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+          <div class="row g-3">
+            <!-- Username -->
+            <div class="col-md-6">
+              <label for="username" class="form-label">Username</label>
+              <input
+                id="username"
+                formControlName="username"
+                type="text"
+                class="form-control"
+                [class.is-invalid]="profileForm.get('username')?.invalid && profileForm.get('username')?.touched"
+              />
+              <div class="invalid-feedback" *ngIf="profileForm.get('username')?.errors?.['required']">
+                Required field
+              </div>
+            </div>
+    
+            <!-- Email -->
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input
+                id="email"
+                formControlName="email"
+                type="email"
+                class="form-control"
+                [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+              />
+              <div class="invalid-feedback" *ngIf="profileForm.get('email')?.errors?.['required']">
+                Required field
+              </div>
+              <div class="invalid-feedback" *ngIf="profileForm.get('email')?.errors?.['email']">
+                Invalid email
+              </div>
+            </div>
+    
+            <!-- Old Password -->
+            <div class="col-md-6">
+              <label for="oldPassword" class="form-label">Old Password</label>
+              <input
+                id="oldPassword"
+                formControlName="oldPassword"
+                type="password"
+                class="form-control"
+              />
+            </div>
+    
+            <!-- New Password -->
+            <div class="col-md-6">
+              <label for="newPassword" class="form-label">New Password</label>
+              <input
+                id="newPassword"
+                formControlName="newPassword"
+                type="password"
+                class="form-control"
+              />
+            </div>
+    
+            <!-- Confirm Password -->
+            <div class="col-md-6">
+              <label for="confirmPassword" class="form-label">Confirm New Password</label>
+              <input
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                type="password"
+                class="form-control"
+              />
+            </div>
+    
+            <!-- Checkboxes in col-12 -->
+            <div class="col-12">
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="consentData"
+                  formControlName="consentData"
+                />
+                <label class="form-check-label" for="consentData">
+                  I consent to the collection of my data
+                </label>
+              </div>
+    
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="consentSuggestions"
+                  formControlName="consentSuggestions"
+                />
+                <label class="form-check-label" for="consentSuggestions">
+                  I agree to receive personalized suggestions
+                </label>
+              </div>
+            </div>
+            <!-- Buttons -->
+            <div class="col-12 mt-4">
+              <div *ngIf="!confirmDelete">
+                <button type="submit" class="btn btn-primary me-2" [disabled]="profileForm.invalid">
+                  Save Changes
+                </button>
+                <button type="button" class="btn btn-outline-danger" (click)="confirmDelete = true">
+                  Delete Account
+                </button>
+              </div>
+            
+              <div *ngIf="confirmDelete" class="alert alert-warning mt-3">
+                <p><strong>Are you sure you want to delete your account?</strong> This action cannot be undone.</p>
+              
+                <div class="mb-3">
+                  <label for="deletePassword" class="form-label">Enter your password to confirm:</label>
+                  <input
+                    id="deletePassword"
+                    type="password"
+                    class="form-control"
+                    [(ngModel)]="deletePassword"
+                    [ngModelOptions]="{ standalone: true }"
+                    name="deletePassword"
+                    required
+                  />
+                </div>
+              
+                <div class="d-flex gap-2">
+                  <button type="button" class="btn btn-danger" (click)="deleteAccount()">Confirm Deletion</button>
+                  <button type="button" class="btn btn-secondary" (click)="confirmDelete = false">Cancel</button>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </form>
+      </div>
+    </div>

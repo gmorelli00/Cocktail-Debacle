@@ -1,0 +1,66 @@
+<div *ngIf="!reviewSuccess">
+  <div class="review-card">
+    <h2 class="mb-4">Leave a review</h2>
+      <!-- Pulsante X -->
+    <button 
+        class="x-button position-absolute top-0 end-0 m-2 border-0 bg-transparent" 
+        (click)="closeAddReview()"
+        style="z-index: 10;">
+        <ng-icon name="heroXMark" class="text-green-500" style="width: 30px; height: 30px;"></ng-icon>
+    </button>
+    <!-- Luogo da selezionare -->
+    <div class="input-group">
+      <label for="place">Place:</label>
+      <input type="text" id="place" [(ngModel)]="placeSearchQuery" [(ngModel)]="placeName" (input)="onPlaceSearchInput()" placeholder="Search a place..." />
+      <div *ngIf="placeSearchResults.length > 0" class="place-list">
+        <div class="place-item" *ngFor="let place of placeSearchResults" 
+             (click)="selectPlace(place)" 
+             [class.selected]="selectedPlace?.place_id === place.place_id">
+          {{ place.name }} - {{ getFormattedAddress(place) }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Cocktail da selezionare -->
+    <div class="input-group">
+      <label for="cocktail">Cocktail:</label>
+      <input type="text" id="cocktail" [(ngModel)]="cocktailSearchQuery" [(ngModel)]="cocktailName" (input)="onCocktailSearchInput()" placeholder="Search a cocktail.." />
+      <div *ngIf="cocktailSearchResults.length > 0" class="cocktail-list">
+        <div class="cocktail-item" *ngFor="let cocktail of cocktailSearchResults" 
+             (click)="selectCocktail(cocktail)" 
+             [class.selected]="selectedCocktail?.idDrink === cocktail.idDrink">
+          {{ cocktail.strDrink }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Voto con stelline -->
+    <div class="rating">
+      <label for="rating">Rating:</label>
+      <div class="stars">
+        <span *ngFor="let star of ratingOptions; let i = index" 
+              [ngClass]="{'selected': newReview.rating > i}" 
+              (click)="setRating(i + 1)">
+          &#9733;
+        </span>
+      </div>
+    </div>
+
+    <!-- Commento -->
+    <div class="input-group">
+      <label for="comment">Description:</label>
+      <textarea id="comment" [(ngModel)]="newReview.comment" placeholder="Add a description..."></textarea>
+    </div>
+
+    <!-- Pulsanti -->
+    <div class="actions">
+      <button (click)="submitReview()" [disabled]="submittingReview" class="submit-btn">
+        {{ submittingReview ? 'Sending...' : 'Send review' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Errori e Successo -->
+<div *ngIf="reviewError" class="error d-flex justify-content-center align-items-center">{{ reviewError }}</div>
+<div *ngIf="reviewSuccess" class="succes justify-content-center align-items-center">Review sent correctly!!</div>

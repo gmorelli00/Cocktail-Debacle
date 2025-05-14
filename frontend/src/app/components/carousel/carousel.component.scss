@@ -1,0 +1,163 @@
+// .home-container {
+//     padding: 0 20px;
+//   }
+  
+//   .home-title {
+//     font-size: 2.5rem;
+//     font-weight: 600;
+//     line-height: 1.5;
+//     color: #333;
+//     opacity: 0;
+//     transform: scale(0.95);
+//     animation: fadeInScale 1s ease-out forwards;
+//   }
+  
+//   /* Animazione */
+//   @keyframes fadeInScale {
+//     0% {
+//       opacity: 0;
+//       transform: scale(0.95);
+//     }
+//     100% {
+//       opacity: 1;
+//       transform: scale(1);
+//     }
+//   }
+  
+  
+//   .carousel-container {
+//     width: 100%;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: center;
+//     perspective: 1000px;
+//   }
+  
+//   .carousel {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     transform-style: preserve-3d;
+//   }
+  
+//   .carousel-slide {
+//     position: relative;
+//     width: 300px;
+//     height: 250px;
+//     margin: 0 -50px;
+//     transition: transform 0.3s ease, z-index 0.3s ease;
+//     transform-origin: center;
+//     cursor: pointer;
+  
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: cover;
+//       border-radius: 12px;
+//       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+//     }
+  
+//     h3 {
+//       position: absolute;
+//       font-size: 1.5rem;
+//       bottom: 10px;
+//       left: 50%;
+//       transform: translateX(-50%);
+//       color: white;
+//       text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+//     }
+//     .discover-tile {
+//         color: #fff;
+//         width: 100%;
+//         height: 100%;
+//         text-decoration: none;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         border-radius: 8px;
+//         transition: transform 0.3s ease;
+      
+//         h3 {
+//           margin: 0;
+//           font-size: 1.5rem;
+//         }
+      
+//         &:hover {
+//           transform: scale(1.05);
+//         }
+//       }
+//       .discover-tile img {
+//         position: absolute;
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//         border-radius: 12px;
+//         z-index: -1; // per far comparire il testo sopra
+//       }     
+//   }
+
+
+.carousel-container {
+  position: relative;
+  display: flex;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  gap: 20px;  // Spazio tra le card
+}
+
+.carousel-slide {
+  position: relative;
+  scroll-snap-align: center;
+}
+
+.carousel-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+    border-radius: 10px;  // Arrotonda gli angoli dello sfondo
+  }
+}
+
+.carousel-image-container img {
+  width: 200px;  // Imposta la larghezza dell'immagine al 100% della card
+  height: 200px;
+  border-radius: 10px;  // Puoi aggiungere bordi arrotondati se lo desideri
+  object-fit: cover;
+}
+
+.carousel-image-container h5 {
+  z-index: 1;  // Assicura che il titolo sia sopra l'immagine
+  position: absolute;
+  bottom: 10px;  // Sposta il titolo verso il basso della card
+  left: 50%;
+  transform: translateX(-50%);  // Centra il titolo orizzontalmente
+  color: white;  // Imposta il colore del testo
+  padding: 5px 10px;  // Aggiunge un po' di spazio intorno al testo
+  border-radius: 5px;  // Angoli arrotondati del titolo
+}
+
+.arrow-left, .arrow-right {
+    background: transparent;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      opacity: 1;
+    }
+  }

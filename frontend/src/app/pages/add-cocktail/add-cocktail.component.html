@@ -1,0 +1,82 @@
+<div class="cocktail-add-container">
+    <h2>Add a new Cocktail</h2>
+  
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center py-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="top-section">
+        <!-- Upload immagine -->
+        <div class="cocktail-image-upload">
+            <input type="file" id="fileInput" (change)="onImageSelected($event)" accept="image/*" hidden required />
+            
+            <div class="upload-box" (click)="triggerFileInput()">
+              <ng-container *ngIf="!imagePreview">
+                <span class="plus-sign">+</span>
+              </ng-container>
+              <ng-container *ngIf="imagePreview">
+                <img [src]="imagePreview" alt="Anteprima" class="preview-image" />
+              </ng-container>
+            </div>
+          </div>
+          
+        <!-- Info principali -->
+        <div class="cocktail-info">
+          <label for="strDrink">Cocktail Name</label>
+          <input type="text" id="strDrink" formControlName="strDrink" class="form-control" placeholder="Cocktail name" required />
+  
+          <label for="strCategory">Category</label>
+          <input type="text" id="strCategory" formControlName="strCategory" class="form-control" placeholder="Category" required />
+  
+          <label for="strAlcoholic">Typo (Alcholic / Non alcholic)</label>
+          <input type="text" id="strAlcoholic" formControlName="strAlcoholic" class="form-control" placeholder="Type" required />
+
+          <label for="strGlass">Glass type</label>
+          <input type="text" id="strGlass" formControlName="strGlass" class="form-control" placeholder="Glass type" required />
+        </div>
+      </div>
+  
+      <!-- Istruzioni -->
+      <div class="bottom-section">
+        <div class="cocktail-instructions">
+          <label for="strInstructions">Instructions</label>
+          <textarea id="strInstructions" formControlName="strInstructions" class="form-control" rows="4" placeholder="Write the instructions" required></textarea>
+        </div>
+  
+        <!-- Ingredienti dinamici -->
+        <div class="cocktail-ingredients">
+          <label>Ingredients</label>
+          <div formArrayName="ingredients">
+            <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="ingredient-group mb-3">
+              <div class="row g-2">
+                <div class="col-6">
+                  <input type="text" formControlName="ingredient" class="form-control" placeholder="Ingredient" required />
+                </div>
+                <div class="col-4">
+                  <input type="text" formControlName="measure" class="form-control" placeholder="Measure" required />
+                </div>
+                <div class="col-2 d-flex align-items-center">
+                  <button *ngIf="ingredients.length > 1" type="button" class="btn btn-danger btn-sm" (click)="removeIngredient(i)">-</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Bottone per aggiungere un ingrediente -->
+          <div class="text-center mt-3">
+            <button type="button" class="btn btn-success btn-sm" (click)="addIngredient()" [disabled]="ingredients.length >= 15">+ Add Ingredient</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Bottone submit -->
+      <div class="form-group text-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add Cocktail</button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,54 @@
+<div class="login-form position-relative p-3">
+  <!-- Pulsante X -->
+  <button 
+    class="x-button position-absolute top-0 end-0 m-2 border-0 bg-transparent" 
+    (click)="closeLogin()"
+    style="z-index: 10;">
+    <ng-icon name="heroXMark" class="text-green-500" style="width: 30px; height: 30px;"></ng-icon>
+  </button>
+
+  <h3>Login</h3>
+
+  <!-- Display error message if any -->
+  <div *ngIf="error()" class="alert alert-danger">
+    {{ error() }}
+  </div>
+
+
+  <!-- Form di login -->
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Log in</button>
+  </form>
+
+  <!-- Divider -->
+<div class="text-center my-3">
+  <span class="text-muted">or</span>
+</div>
+
+<!-- Bottone Google -->
+<button (click)="loginWithGoogle()" type="button" 
+  class="btn w-100 d-flex align-items-center justify-content-center gap-2 px-3 py-2 border rounded-pill shadow-sm"
+  style="background-color: white; border-color: #ddd;">
+  <img src="/assets/google.svg" alt="Google logo" width="20" height="20">
+  <span class="text-dark fw-medium">Continue with Google</span>
+</button>
+
+
+
+  <!-- Cambia a registrazione -->
+  <div class="text-center mt-3">
+    <p class="text-muted">Don't have an account?</p>
+    <button (click)="switchToRegisterForm()" class="btn btn-link">Register</button>
+  </div>
+</div>
+

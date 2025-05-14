@@ -1,0 +1,13 @@
+.main-container {
+    padding: 0!important;
+    margin-top: 50px;
+    overflow-x: hidden;
+    min-width: 400px;
+}
+
+@media (min-width: 769px)
+{   .main-container {
+        max-width: calc(100% - 80px);
+        margin-left: 80px;
+    }
+}

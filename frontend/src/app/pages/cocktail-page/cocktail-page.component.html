@@ -1,0 +1,147 @@
+<div *ngIf="loading">Caricamento...</div>
+
+<div *ngIf="cocktail" class="cocktail-detail-container">
+  <div class="top-section d-flex gap-4">
+    <!-- Immagine -->
+    <div class="cocktail-image">
+      <img [src]="cocktail.strDrinkThumb" alt="{{ cocktail.strDrink }}" />
+    </div>
+  
+    <!-- Info + Created by incolonnati -->
+    <div class="cocktail-info d-flex flex-column">
+      <div class="info-main flex-grow-1">
+        <h2>{{ cocktail.strDrink }}</h2>
+        <p>Category: <span class="text-muted"> {{ cocktail.strCategory }}</span></p> 
+        <p>Alcholic: <span class="text-muted">{{ cocktail.strAlcoholic }}</span></p>
+        <p>Glass type: <span class="text-muted">  {{ cocktail.strGlass }}</span></p>
+      </div>
+    
+      <div *ngIf="cocktail.userName" class="created-by mt-3 mb-0 d-flex align-items-center justify-content-start">
+        <strong>Created by:</strong>
+        <a
+        [routerLink]="['/profile', cocktail.userName]"
+        class="d-flex align-items-center user-profile-link text-decoration-none">
+          <app-user-image
+            [userName]="cocktail.userName"
+            size="small"
+            class="me-2 clickable"
+          ></app-user-image>
+          <div class="mb-0">{{ cocktail.userName }}</div>
+        </a>
+      </div>
+    </div>
+    
+  
+    <!-- Pulsante preferito -->
+    <button
+      class="favorite-icon-btn align-self-start"
+      style="background: none; border: none; padding: 0; margin-left: auto"
+      (click)="toggleFavorite(cocktail)">
+      <ng-icon
+        *ngIf="!cocktail.isFavorite"
+        name="heroBookmark"
+        style="width: 22px; height: 22px"
+      ></ng-icon>
+      <ng-icon
+        *ngIf="cocktail.isFavorite"
+        name="heroBookmarkSolid"
+        style="width: 22px; height: 22px"
+      ></ng-icon>
+    </button>
+  </div>
+  
+
+  <!-- Sezione inferiore: istruzioni e ingredienti -->
+  <div class="bottom-section">
+    <div class="custom-card cocktail-instructions">
+      <h3>Instructions</h3>
+      <p class="text-muted">{{ cocktail.strInstructions }}</p>
+    </div>
+
+    <div class="custom-card">
+      <h3>Ingredients</h3>
+      <ul class="ingredient-list cocktail-ingredients">
+        <!-- Genera i dots in base al numero di ingredienti -->
+        <li *ngFor="let i of getIngredientDots()">
+          <ng-container *ngIf="cocktail['strIngredient' + i]">
+            <div class="ingredient" >
+              <span class="dot"></span>
+              <span class="text-muted">{{ cocktail['strIngredient' + i] }}</span> - {{ cocktail['strMeasure' + i] || '' }}
+            </div>
+          </ng-container>
+        </li>
+      </ul>      
+    </div>
+  </div>
+  
+  <!-- Places Reviews Section -->
+  <div class="places-section container gap-5 mt-5">
+    <h3 class="text-center mb-4">Where to find this cocktail near you
+        <button class="btn btn-sm btn-outline-primary" (click)="openAddReview(cocktail.strDrink)">
+          Leave a review
+        </button>
+    </h3>
+    
+    <!-- Location error message -->
+    <div *ngIf="locationError" class="alert alert-warning my-3">
+      {{ locationError }}
+    </div>
+    
+    <!-- Loading indicator for reviews -->
+    <div *ngIf="reviewsLoading" class="text-center py-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading nearby places...</span>
+      </div>
+    </div>
+    
+    <!-- No reviews message -->
+    <div *ngIf="!reviewsLoading && placeReviews.length === 0" class="text-center py-3">
+      <p class="text-muted">No places serving this cocktail found near your location.</p>
+    </div>
+    
+    <!-- Reviews grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div *ngFor="let place of placeReviews" class="col">
+        <div class="card h-100 place-card" (click)="navigateToPlace(place.googlePlaceId)">
+          <!-- Loading state -->
+          <div *ngIf="place.loading" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <!-- Error state -->
+          <div *ngIf="!place.loading && place.error" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+            <div class="text-muted">Place details not available</div>
+          </div>
+          
+          <!-- Image -->
+          <img *ngIf="!place.loading && !place.error && place.photoUrl" 
+               [src]="place.photoUrl" 
+               class="card-img-top place-image" 
+               alt="{{ place.name || 'Place' }}">
+          
+          <!-- No image placeholder -->
+          <div *ngIf="!place.loading && !place.error && !place.photoUrl" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+            <div class="text-muted">No image available</div>
+          </div>
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ place.name || 'Unknown Place' }}</h5>
+            <p class="card-text text-muted small mb-2">{{ place.address || 'No address available' }}</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <div class="rating">
+                <span class="stars">{{ getStarRating(place.averageScore) }}</span>
+                <span class="average">{{ place.averageScore.toFixed(1) }}</span>
+              </div>
+              <span class="review-count">{{ place.reviewCount }} {{ place.reviewCount === 1 ? 'review' : 'reviews' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>

@@ -1,0 +1,117 @@
+.input-group {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+
+  .search-results, .cocktail-list, .place-list {
+    margin-top: 0.5rem;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+
+    li, .cocktail-item, .place-item {
+      padding: 8px 12px;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #ddd;
+      }
+
+      &.selected {
+        background-color: #28a745;
+        color: white;
+      }
+    }
+  }
+}
+
+.rating {
+  margin-bottom: 1rem;
+
+  .stars {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+
+    span {
+      font-size: 1.5rem;
+      cursor: pointer;
+
+      &.selected {
+        color: gold;
+      }
+    }
+  }
+}
+
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.success {
+  color: green;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+
+  .cancel-btn, .submit-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .cancel-btn {
+    background-color: #ccc;
+
+    &:hover {
+      background-color: #bbb;
+    }
+  }
+
+  .submit-btn {
+    background-color: #28a745;
+    color: white;
+
+    &:hover {
+      background-color: #218838;
+    }
+
+    &:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}

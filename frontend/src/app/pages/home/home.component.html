@@ -1,0 +1,95 @@
+<div class="home-container" [class.hidden]="scrolled" #homeSection>
+  <div class="overlay" [class.hidden]="scrolled">
+    <img [src]="'/assets/images/spritz.png'" alt="Spritz" class="heroImage1"/>
+    <img [src]="'/assets/images/lime.png'" alt="Lime" class="heroImage2"/>
+    <div class="hero-container row justify-content-center">
+      <div class="col-8">
+        <h1 class="home-title text-center animate-title" style="z-index: 2;">
+          Welcome to <br><span class="gradient-text">Cocktail Débâcle</span>.
+        </h1>
+        <h3 class="text-shadow">Discover the recipes and review the best places to taste your favorites cocktails</h3>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-buttons">
+      <button class="cta-btn" (click)="navigateTo('cocktails')">Explore Cocktails</button>
+      <button class="cta-btn" (click)="navigateTo('places')">Find Places</button>
+    </div>
+
+    <!-- <div class="scroll-arrow" *ngIf="showArrow">
+      <span>&#x2193;</span>
+    </div> -->
+  </div>
+</div>
+
+<!-- SEZIONE 1 -->
+<div class="container-fluid discover-section">
+  <h2 class="discover-text">So many cocktails, discover them all!</h2>
+  <div class="row w-75">
+    <div class="col-8">
+      <h4 class="d-flex align-self-start">The most popular:</h4>
+    </div>
+    <div class="col-4 d-flex justify-content-end">
+      <button class="btn btn-outline-primary" (click)="navigateTo('cocktails')">See all</button>
+    </div>
+  </div>
+  <app-carousel class="app-carousel"></app-carousel>
+</div>
+
+<!-- SEZIONE 2: nuova immagine -->
+<div class="image-section">
+  <div class="overlay">
+    <h2 class="section-title">Find the best places to drink your favorites cocktails</h2>
+    <div class="bento-grid">
+      <ng-container *ngFor="let place of places; let i = index">
+        <!-- Prima card speciale -->
+        <div *ngIf="i === 3" class="bento-box box-4 gradient-card1">
+          <div class="box-overlay static-text">
+            <div class="main-text">Discover the places near you</div>
+            <div class="sub-text">Click on one of the boxes</div>
+          </div>
+        </div>
+    
+        <!-- Seconda card speciale -->
+        <div *ngIf="i === 5" class="bento-box box-6 gradient-card2" [routerLink]="['/places']" style="cursor: pointer;">
+          <div class="box-overlay static-text">
+            <div class="main-text">Find more</div>
+            <div class="sub-text">by clicking here</div>
+          </div>
+        </div>
+    
+        <!-- Card con dati dinamici -->
+
+        <div
+          *ngIf="i !== 3 && i !== 5"
+          class="bento-box"
+          [ngClass]="'box-' + (i + 1)"
+          [style.backgroundImage]="'url(' + (place.photoUrl || fallbackImage) + ')'"
+          (click)="goToPlace(place.place_id)"
+          style="cursor: pointer;"
+        >
+          <div class="box-overlay">
+            <div class="place-name">{{ place.name }}</div>
+            <div class="place-address">{{ place.formatted_address || place.vicinity }}</div>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+
+</div>
+<div class="row py-5" style="background-color: #ebebe9;">
+  <div class="col-12 d-flex align-items-center justify-content-center flex-column">
+    <h2>Join the comunity!</h2>
+    <div class="cta-buttons pt-4">
+      <button class="cta-btn" (click)="toggleLoginForm()" >
+        Register
+      </button>
+    </div>
+  </div>
+</div>
+
+
+

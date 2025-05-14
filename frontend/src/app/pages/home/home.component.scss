@@ -1,0 +1,339 @@
+.home-container {
+  position: fixed;
+  height: 80vh;
+  width: calc(100% - 80px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .text-shadow {
+    text-shadow: 2px 2px 8px #fff;
+  }
+
+  .heroImage1, .heroImage2 {
+    position: absolute;
+    object-fit: cover;
+    overflow: visible;
+    z-index: -1;
+    transition: all 0.3s ease;
+    width: 30vw;
+    height: 30vh;
+    @media (min-width: 768px) {
+      width: 30vw;
+      height: 30vh;
+    }
+  
+    @media (min-width: 1200px) {
+      width: 30vw;
+      height: 30vh;
+    }
+  }
+  
+  .heroImage1 {
+    bottom: 20px;
+    left: 30px;
+    @media (min-width: 768px) {
+      bottom: 30px;
+      left: 20px;
+    }
+  }
+  
+  .heroImage2 {
+    top: 20px;
+    right: 20px;
+    @media (min-width: 768px) {
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  .home-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    animation: fadeInDown 1s ease-out;
+    color: #292727;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #d5710e, #dab603);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  
+
+  .scroll-arrow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+    color: #292727;
+    cursor: default;
+  }
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+}
+
+.discover-section {
+  position: relative;
+  height: 70vh;
+  width: 100%;
+  margin-top: 88vh; // mantiene il layout dopo home-container
+  background-color: #ebebe9;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // centra verticalmente
+  align-items: center;     // centra orizzontalmente
+  text-align: center;
+  font-size: 2rem;
+
+  .discover-text {
+    margin-bottom: 2rem;
+  }
+
+  .carousel-container {
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+.popular-section {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  background-color: #ebebe9;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // centra verticalmente
+  align-items: center;     // centra orizzontalmente
+  text-align: center;
+  font-size: 2rem;
+
+  .discover-text {
+    margin-bottom: 2rem;
+  }
+
+  .carousel-container {
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+.image-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ebebe9;
+  z-index: 1;
+
+  .section-title {
+    color: #292727;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px; /* Aggiunto margine per separare dal bento */
+    animation: fadeIn 1s ease-in;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonne per la griglia */
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+    grid-template-rows: auto;
+  }
+
+  .bento-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0px 1px rgb(0, 0, 0);
+    transition: transform 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    
+    /* Configurazione per le card con dimensioni diverse */
+    &:nth-child(1) {
+      grid-column: span 2; /* Prima card che occupa due colonne */
+      grid-row: span 25; /* Prima card che occupa due righe */
+    }
+
+    &:nth-child(2) {
+      grid-column: span 1; /* Seconda card che occupa due colonne */
+      grid-row: span 50; /* Seconda card che occupa due righe */
+    }
+
+    &:nth-child(3) {
+      grid-column: span 1; /* Terza card che occupa due colonne */
+      grid-row: span 30; /* Terza card che occupa due righe */
+    }
+
+    &:nth-child(4) {
+      grid-column: span 1; /* Quarta card che occupa due colonne */
+      grid-row: span 25; /* Quarta card che occupa due righe */
+    }
+
+    &:nth-child(5) {
+      grid-column: span 1; /* Quarta card che occupa due colonne */
+      grid-row: span 25; /* Quarta card che occupa due righe */
+    }
+
+    &:nth-child(6) {
+      grid-column: span 1; /* Quarta card che occupa due colonne */
+      grid-row: span 20; /* Quarta card che occupa due righe */
+    }
+
+
+
+    .box-overlay {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+      color: white;
+      padding: 10px;
+      padding-top: 20px;
+      font-size: 0.8rem;
+      border-radius: 5px;
+    }
+    &.gradient-card1 {
+      background: #292727;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    
+      .box-overlay {
+        background: none;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: white;
+    
+        &.static-text {
+          .main-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+          }
+          .sub-text {
+            font-size: 1rem;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    &.gradient-card2 {
+      background: linear-gradient(135deg, #d5710e, #dab603);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+
+      .box-overlay {
+        background: none;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: white;
+    
+        &.static-text {
+          .main-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+          }
+          .sub-text {
+            font-size: 1rem;
+            opacity: 0.9;
+          }
+        }
+      }
+
+    }
+    
+  }
+}
+
+
+// .box-1 { grid-column: span 2; grid-row: span 2; }
+// .box-3 { grid-column: span 2; }
+// .box-6 { grid-row: span 2; }
+
+.app-carousel
+{
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+@media screen and (max-width: 768px) {
+  .home-container {
+    width: 100%!important;
+  }
+}
+
+.cta-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  z-index: 2;
+
+  .cta-btn {
+    width: 190px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #292727;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #333;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
