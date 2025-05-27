@@ -5,11 +5,12 @@ import { HostListener } from '@angular/core';
 import { PlaceService, PlaceResult } from "../../services/place.service";
 import { Router, RouterModule } from '@angular/router';
 import { AuthModalService } from "../../services/auth-modal.service";
+import { ButtonComponent } from '../../components/button/button.component';
 import { AuthService } from '../../services/auth.service';
  
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, CarouselComponent, RouterModule],
+  imports: [CommonModule, CarouselComponent, RouterModule, ButtonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

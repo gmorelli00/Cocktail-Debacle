@@ -65,6 +65,9 @@ export class NavbarComponent {
     ).subscribe((event: NavigationEnd) => {
       this.updateIcons(event.url);
     });
+    this.reviewService.reviewModal$.subscribe(open => {
+      this.isAddReview = open;
+    });
   }
 
 
@@ -112,10 +115,10 @@ export class NavbarComponent {
       this.toggleLoginForm();
       return;
     }
-    this.reviewService.toggle(); // Mostra il modal
-    this.isAddReview = !this.isAddReview;
+    this.reviewService.toggle();
     this.showAddReview = false;
   }
+
 
   onReviewSuccess() {
     this.isAddReview = !this.isAddReview;

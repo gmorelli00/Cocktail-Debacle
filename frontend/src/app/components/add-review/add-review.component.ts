@@ -8,11 +8,12 @@ import { CocktailService } from '../../services/cocktails.service';
 import { SearchService } from '../../services/search.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { ButtonComponent } from '../button/button.component';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-add-review',
-  imports: [CommonModule, FormsModule, NgIcon],
+  imports: [CommonModule, FormsModule, NgIcon, ButtonComponent],
   templateUrl: './add-review.component.html',
   styleUrls: ['./add-review.component.scss']
 })

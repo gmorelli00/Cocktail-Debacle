@@ -1,7 +1,21 @@
-.place-details {
-    padding-top: 100px;
-    max-width: 600px;
-    margin: 0 auto;
+.place-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  }
+
+  a {
+    text-decoration: none!important;
+  }
+
+  p {
+    background: linear-gradient(45deg, #d5710e, #dab603);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* necessario per WebKit */
   }
   
   .photo-container {
@@ -21,7 +35,7 @@
     width: 100%;
     object-fit: cover;
     transition: opacity 0.2s;
-    border-radius: 0.25rem;
+    border-radius: 20px;
   }
   
   .photo-container a:hover img {

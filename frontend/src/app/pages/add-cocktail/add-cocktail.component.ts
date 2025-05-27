@@ -9,10 +9,11 @@ import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthModalService } from "../../services/auth-modal.service";
 import { AuthService } from '../../services/auth.service';
+import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-add-cocktail',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonComponent],
   templateUrl: './add-cocktail.component.html',
   styleUrls: ['./add-cocktail.component.scss'],
 })

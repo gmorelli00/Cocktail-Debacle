@@ -84,6 +84,11 @@
   }
 }
 
+.main-content {
+
+  background-color: #ebebe9;
+}
+
 .discover-section {
   position: relative;
   height: 70vh;
@@ -96,10 +101,11 @@
   justify-content: center; // centra verticalmente
   align-items: center;     // centra orizzontalmente
   text-align: center;
-  font-size: 2rem;
 
   .discover-text {
     margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
   }
 
   .carousel-container {
@@ -119,7 +125,6 @@
   justify-content: center; // centra verticalmente
   align-items: center;     // centra orizzontalmente
   text-align: center;
-  font-size: 2rem;
 
   .discover-text {
     margin-bottom: 2rem;
@@ -131,17 +136,9 @@
   }
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translate(-50%, 0);
-  }
-  50% {
-    transform: translate(-50%, 10px);
-  }
-}
-
 .image-section {
   position: relative;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -152,6 +149,7 @@
   .section-title {
     color: #292727;
     font-size: 2.5rem;
+    font-weight: bold;
     text-align: center;
     margin-bottom: 30px; /* Aggiunto margine per separare dal bento */
     animation: fadeIn 1s ease-in;

@@ -26,15 +26,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 /* Il form di login sarà centrato nell'overlay */
 .card {
   z-index: 500;
   background-color: #f0f0f5;
-  padding: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0.4, 0.4, 0.4, 0.4);
   max-width: 400px;
   width: 100%;
@@ -68,6 +67,14 @@
   background-color: none;
   border-radius: 20px;
   cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    background-color: #292727bc;
+  }
+  &:active {
+    background-color: #292727;
+  }
 }
 
 @media screen and (max-width: 768px) {

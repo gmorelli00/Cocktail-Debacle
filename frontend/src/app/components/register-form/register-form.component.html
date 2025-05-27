@@ -1,4 +1,4 @@
-<div class="register-form position-relative p-3">
+<div class="register-form position-relative p-5">
     <!-- Pulsante X -->
     <button 
       class="x-button position-absolute top-0 end-0 m-2 border-0 bg-transparent" 
@@ -50,13 +50,12 @@
         </label>
       </div>
 
-  
-      <button 
-        type="submit" 
-        class="btn btn-success mt-3 w-100" 
-        [disabled]="!acceptedTerms || !acceptedPrivacy">
-        Register
-      </button>
+      <app-button
+        class="d-flex align-items-center justify-content-center mt-4"
+        type="submit"
+        [disabled]="!acceptedTerms || !acceptedPrivacy"
+        label="Register">
+      </app-button>
       <div class="text-center mt-3">
         <p class="text-muted">By registering, you agree to our 
           <a href="#" class="text-decoration-none">Terms of Service</a> and 

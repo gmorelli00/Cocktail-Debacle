@@ -9,9 +9,11 @@
     </div>
   
     <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-      <div class="top-section">
+      <label for="strDrink">Cocktail Name</label>
+      <input type="text" id="strDrink" formControlName="strDrink" class="form-control" placeholder="Cocktail name" required />
+      <div class="top-section mt-4">
         <!-- Upload immagine -->
-        <div class="cocktail-image-upload">
+        <div class="cocktail-image-upload mt-4">
             <input type="file" id="fileInput" (change)="onImageSelected($event)" accept="image/*" hidden required />
             
             <div class="upload-box" (click)="triggerFileInput()">
@@ -26,8 +28,6 @@
           
         <!-- Info principali -->
         <div class="cocktail-info">
-          <label for="strDrink">Cocktail Name</label>
-          <input type="text" id="strDrink" formControlName="strDrink" class="form-control" placeholder="Cocktail name" required />
   
           <label for="strCategory">Category</label>
           <input type="text" id="strCategory" formControlName="strCategory" class="form-control" placeholder="Category" required />
@@ -41,10 +41,10 @@
       </div>
   
       <!-- Istruzioni -->
-      <div class="bottom-section">
+      <div class="bottom-section mt-3">
         <div class="cocktail-instructions">
           <label for="strInstructions">Instructions</label>
-          <textarea id="strInstructions" formControlName="strInstructions" class="form-control" rows="4" placeholder="Write the instructions" required></textarea>
+          <textarea id="strInstructions" formControlName="strInstructions" class="form-control p-3" rows="4" placeholder="Write the instructions" required></textarea>
         </div>
   
         <!-- Ingredienti dinamici -->
@@ -53,13 +53,13 @@
           <div formArrayName="ingredients">
             <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="ingredient-group mb-3">
               <div class="row g-2">
-                <div class="col-6">
+                <div class="col-7">
                   <input type="text" formControlName="ingredient" class="form-control" placeholder="Ingredient" required />
                 </div>
                 <div class="col-4">
                   <input type="text" formControlName="measure" class="form-control" placeholder="Measure" required />
                 </div>
-                <div class="col-2 d-flex align-items-center">
+                <div class="col-1 d-flex justify-content-center">
                   <button *ngIf="ingredients.length > 1" type="button" class="btn btn-danger btn-sm" (click)="removeIngredient(i)">-</button>
                 </div>
               </div>
@@ -68,14 +68,23 @@
   
           <!-- Bottone per aggiungere un ingrediente -->
           <div class="text-center mt-3">
-            <button type="button" class="btn btn-success btn-sm" (click)="addIngredient()" [disabled]="ingredients.length >= 15">+ Add Ingredient</button>
+            <app-button
+              label="Add ingredients"
+              (clicked)="addIngredient()"
+              [disabled]="ingredients.length >= 15">
+            </app-button>
           </div>
         </div>
       </div>
   
       <!-- Bottone submit -->
-      <div class="form-group text-center mt-4">
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add Cocktail</button>
+      <div class="form-group text-center mt-5">
+        <app-button
+          class="d-flex align-items-center justify-content-center mt-4"
+          type="submit"
+          [disabled]="form.invalid"
+          label="Add Cocktail">
+        </app-button>
       </div>
     </form>
   </div>

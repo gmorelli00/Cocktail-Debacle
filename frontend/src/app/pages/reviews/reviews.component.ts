@@ -2,25 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReviewService, Review, ReviewCreateDto, ReviewUpdateDto } from '../../services/review.service';
+import { ReviewService, Review, ReviewCreateDto, ReviewUpdateDto, CocktailReviewMetadata } from '../../services/review.service';
 import { PlaceService, PlaceResult } from '../../services/place.service';
 import { CocktailService } from '../../services/cocktails.service';
 import { AuthService } from '../../services/auth.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { catchError, forkJoin, of } from 'rxjs';
+import { catchError, forkJoin, map, of } from 'rxjs';
 import { ReviewCardComponent } from '../../components/review-card/review-card.component';
 import { RouterModule } from '@angular/router';
 import { NgIconsModule } from '@ng-icons/core';
 import { AuthModalService } from '../../services/auth-modal.service';
+import { ButtonComponent } from '../../components/button/button.component';
 
+interface CocktailReviewWithDetails extends CocktailReviewMetadata {
+  strDrink?: string;
+  strDrinkThumb?: string;
+  loading?: boolean;
+  error?: boolean;
+}
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReviewCardComponent, RouterModule, NgIconsModule],
+  imports: [CommonModule, FormsModule, ReviewCardComponent, RouterModule, NgIconsModule, ButtonComponent],
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss']
 })
+
+
 export class ReviewsComponent implements OnInit {
   placeId: string = '';
   cocktailId: string = '';
@@ -57,7 +66,7 @@ export class ReviewsComponent implements OnInit {
   reviewsLoading: boolean = false;
   reviewSuccess: boolean = false;
   reviewError: string = '';
-  
+  cocktailReviews: CocktailReviewWithDetails[] = [];
 
   // Rating options for the selector
   ratingOptions = [1, 2, 3, 4, 5];
@@ -103,6 +112,7 @@ export class ReviewsComponent implements OnInit {
       this.loadPlaceCocktail();
       this.loadReviews();
     });
+    this.loadCocktailReviews();
   }
 
 
@@ -183,20 +193,25 @@ export class ReviewsComponent implements OnInit {
     }
   }
   
-  toggleReviewForm(): void {
-    // Check if user is logged in
-    if (!this.currentUser) {
-      this.authModalService.open();
-      return;
-    }
+  // toggleReviewForm(): void {
+  //   // Check if user is logged in
+  //   if (!this.currentUser) {
+  //     this.authModalService.open();
+  //     return;
+  //   }
     
-    this.showReviewForm = !this.showReviewForm;
+  //   this.showReviewForm = !this.showReviewForm;
     
-    // Reset form state when toggling
-    if (this.showReviewForm) {
-      this.reviewSuccess = false;
-      this.reviewError = '';
-    }
+  //   // Reset form state when toggling
+  //   if (this.showReviewForm) {
+  //     this.reviewSuccess = false;
+  //     this.reviewError = '';
+  //   }
+  // }
+  openAddReview(placeName: string, cocktailName: string): void {
+    this.reviewService.setPlaceName(placeName);
+    this.reviewService.setCocktailName(cocktailName);
+    this.reviewService.toggle();
   }
   
   submitReview(): void {
@@ -268,4 +283,60 @@ export class ReviewsComponent implements OnInit {
       this.router.navigate(['/profile', username]);
     }
   }
+
+    loadCocktailReviews(): void {
+      this.reviewsLoading = true;
+  
+      this.reviewService.getPlaceReviewMetadata(this.placeId).subscribe({
+        next: (metadata) => {
+          this.cocktailReviews = metadata.map(item => ({
+            ...item,
+            loading: true,
+            error: false
+          }));
+  
+          if (this.cocktailReviews.length > 0) {
+            this.loadCocktailDetails();
+          } else {
+            this.reviewsLoading = false;
+          }
+        },
+        error: () => {
+          this.reviewsLoading = false;
+        }
+      });
+    }
+  
+    loadCocktailDetails(): void {
+      const cocktailRequests = this.cocktailReviews.map(review =>
+        this.cocktailService.getCocktailById(review.cocktailId).pipe(
+          map(drink => ({ review, drink })),
+          catchError(() => of({ review, drink: null }))
+        )
+      );
+  
+      forkJoin(cocktailRequests).subscribe(results => {
+        results.forEach(result => {
+          const index = this.cocktailReviews.findIndex(r => r.cocktailId === result.review.cocktailId);
+          if (index !== -1) {
+            if (result.drink) {
+              this.cocktailReviews[index] = {
+                ...this.cocktailReviews[index],
+                strDrink: result.drink.strDrink,
+                strDrinkThumb: result.drink.strDrinkThumb,
+                loading: false
+              };
+            } else {
+              this.cocktailReviews[index] = {
+                ...this.cocktailReviews[index],
+                loading: false,
+                error: true
+              };
+            }
+          }
+        });
+  
+        this.reviewsLoading = false;
+      });
+    }
 } 

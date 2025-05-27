@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlaceService, PlaceResult } from '../../services/place.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ButtonComponent } from '../../components/button/button.component';
+import { ReviewService } from '../../services/review.service';
 
 // importa il nuovo componente
-import { ReviewsPlaceComponent } from '../../components/reviews-place/reviews-place.component';
+import { ReviewsGridComponent } from '../../components/reviews-grid/reviews-grid.component';
 import { NgIconsModule } from '@ng-icons/core';
 
 @Component({
   selector: 'app-place-page',
-  imports: [CommonModule, ReviewsPlaceComponent, NgIconsModule],
+  imports: [CommonModule, ReviewsGridComponent, NgIconsModule, ButtonComponent],
   templateUrl: './place-page.component.html',
   styleUrl: './place-page.component.scss'
 })
@@ -28,7 +30,8 @@ export class PlacePageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private placeService: PlaceService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +64,10 @@ export class PlacePageComponent implements OnInit {
     });
   }
   
+  openAddReview(placeName: string): void {
+    this.reviewService.setPlaceName(placeName);
+    this.reviewService.toggle();
+  }
 
   loadPlacePhoto(): void {
     if (this.place?.photos && this.place.photos.length > 0) {

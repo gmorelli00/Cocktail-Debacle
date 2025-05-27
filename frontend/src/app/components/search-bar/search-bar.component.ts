@@ -39,6 +39,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     this.checkIfHome();
+    this.onWindowScroll();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkIfHome();
@@ -63,7 +64,7 @@ export class SearchBarComponent implements OnInit {
 
   private checkIfHome(): void {
     this.isHome = this.router.url === '/';
-    this.isScrolled = false;
+    this.resetScrollState();
   }
 
   @HostListener('window:scroll', [])
@@ -167,4 +168,9 @@ export class SearchBarComponent implements OnInit {
   toggleFilters() {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  private resetScrollState(): void {
+  this.isScrolled = false;
+  this.isOnDiscoverSection = false;
+}
 }

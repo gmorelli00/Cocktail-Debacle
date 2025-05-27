@@ -1,5 +1,5 @@
 <div *ngIf="!reviewSuccess">
-  <div class="review-card">
+  <div class="review-card p-5">
     <h2 class="mb-4">Leave a review</h2>
       <!-- Pulsante X -->
     <button 
@@ -11,7 +11,7 @@
     <!-- Luogo da selezionare -->
     <div class="input-group">
       <label for="place">Place:</label>
-      <input type="text" id="place" [(ngModel)]="placeSearchQuery" [(ngModel)]="placeName" (input)="onPlaceSearchInput()" placeholder="Search a place..." />
+      <input class="input-form" type="text" id="place" [(ngModel)]="placeSearchQuery" [(ngModel)]="placeName" (input)="onPlaceSearchInput()" placeholder="Search a place..." />
       <div *ngIf="placeSearchResults.length > 0" class="place-list">
         <div class="place-item" *ngFor="let place of placeSearchResults" 
              (click)="selectPlace(place)" 
@@ -53,11 +53,12 @@
     </div>
 
     <!-- Pulsanti -->
-    <div class="actions">
-      <button (click)="submitReview()" [disabled]="submittingReview" class="submit-btn">
-        {{ submittingReview ? 'Sending...' : 'Send review' }}
-      </button>
-    </div>
+    <app-button
+      label="Send review"
+      loadingLabel="Sending..."
+      [isLoading]="submittingReview"
+      (clicked)="submitReview()">
+    </app-button>
   </div>
 </div>
 

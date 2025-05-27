@@ -89,7 +89,7 @@
 
 <!-- Overlay per il login -->
 <div *ngIf="authModalService.loginModal$ | async" class="overlay" (click)="toggleLoginForm()">
-  <div class="card position-relative px-5" (click)="$event.stopPropagation()">
+  <div class="card position-relative" (click)="$event.stopPropagation()">
     <app-login-form 
       *ngIf="!showRegisterForm"
       (loginSuccess)="onLoginSuccess()" 
@@ -106,7 +106,7 @@
 </div>
 
 <div *ngIf="reviewService.reviewModal$ | async" class="overlay" (click)="toggleAddReview()">
-  <div class="card position-relative px-5" (click)="$event.stopPropagation()">
+  <div class="card position-relative" (click)="$event.stopPropagation()">
     <app-add-review *ngIf="!showAddReview" (onReviewSucces)="onReviewSuccess()" (closeForm)="toggleAddReview()">
     </app-add-review>
   </div>

@@ -1,0 +1,112 @@
+<ng-container *ngIf="placeId && cocktailReviews.length > 0; else showPlaceReviews">
+    <!-- Loading indicator for reviews -->
+    <div *ngIf="reviewsLoading" class="text-center py-3">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading cocktail reviews...</span>
+        </div>
+    </div>
+
+    <!-- No reviews message -->
+    <div *ngIf="!reviewsLoading && cocktailReviews.length === 0" class="text-center py-3 mt-5">
+        <p class="text-muted">No cocktail reviews for this place yet.</p>
+    </div>
+
+    <!-- Reviews grid -->
+    <div *ngIf="!reviewsLoading"  class="grid-section row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        <div *ngFor="let review of cocktailReviews" class="col">
+            <div class="card h-100 review-card" (click)="navigateToCocktail(review.cocktailId)">
+                <!-- Loading state -->
+                <div *ngIf="review.loading" class="card-img-top review-image-placeholder d-flex align-items-center justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            
+                <!-- Error state -->
+                <div *ngIf="!review.loading && review.error" class="review-img-top cocktail-image-placeholder d-flex align-items-center justify-content-center">
+                    <div class="text-muted">Image not available</div>
+                </div>
+            
+                <!-- Image -->
+                <img *ngIf="!review.loading && !review.error && review.strDrinkThumb" 
+                    [src]="review.strDrinkThumb" 
+                    class="card-img-top review-image img-fluid mx-auto" 
+                    alt="{{ review.strDrink || 'Cocktail' }}">
+            
+                <div class="card-body row d-flex flex-column justify-content-center align-items-center">
+                    <h5 class="card-title col-12">{{ review.strDrink || 'Unknown Cocktail' }}</h5>
+                    <div class="col-12">
+                        <div class="rating">
+                            <span class="stars">{{ getStarRating(review.averageScore) }}</span>
+                            <span class="average">{{ review.averageScore.toFixed(1) }}</span>
+                        </div>
+                        <div class="review-count text-muted col-12">{{ review.reviewCount }} {{ review.reviewCount === 1 ? 'review' : 'reviews' }}</div>             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #showPlaceReviews>
+    <div *ngIf="cocktailId && placeReviews.length > 0">
+        <!-- Location error message -->
+        <div *ngIf="locationError" class="alert alert-warning my-3">
+            {{ locationError }}
+        </div>
+
+        <!-- Loading indicator for reviews -->
+        <div *ngIf="reviewsLoading" class="text-center py-3">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading nearby places...</span>
+            </div>
+        </div>
+
+        <!-- No reviews message -->
+        <div *ngIf="!reviewsLoading && placeReviews.length === 0" class="text-center py-3 mt-5">
+            <p class="text-muted">No places serving this cocktail found near your location.</p>
+        </div>
+
+        <!-- Reviews grid -->
+        <div class="grid-section row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+            <div *ngFor="let place of placeReviews" class="col">
+                <div class="card h-100 review-card" (click)="navigateToPlace(place.googlePlaceId)">
+                    <!-- Loading state -->
+                    <div *ngIf="place.loading" class="card-img-top review-image-placeholder d-flex align-items-center justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Error state -->
+                    <div *ngIf="!place.loading && place.error" class="card-img-top review-image-placeholder d-flex align-items-center justify-content-center">
+                        <div class="text-muted">Place details not available</div>
+                    </div>
+                    
+                    <!-- Image -->
+                    <img *ngIf="!place.loading && !place.error && place.photoUrl" 
+                        [src]="place.photoUrl" 
+                        class="card-img-top review-image img-fluid mx-auto" 
+                        alt="{{ place.name || 'Place' }}">
+                    
+                    <!-- No image placeholder -->
+                    <div *ngIf="!place.loading && !place.error && !place.photoUrl" class="card-img-top place-image-placeholder d-flex align-items-center justify-content-center">
+                        <div class="text-muted">No image available</div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ place.name || 'Unknown Place' }}</h5>
+                        <p class="card-text text-muted small mb-2">{{ place.address || 'No address available' }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <div class="rating">
+                                <span class="stars">{{ getStarRating(place.averageScore) }}</span>
+                                <span class="average">{{ place.averageScore.toFixed(1) }}</span>
+                            </div>
+                            <span class="review-count">{{ place.reviewCount }} {{ place.reviewCount === 1 ? 'review' : 'reviews' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

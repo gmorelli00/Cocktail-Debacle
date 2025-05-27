@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="place-container my-4">
 
     <div *ngIf="loading" class="text-center py-5">
       <div class="spinner-border text-primary" role="status">
@@ -36,7 +36,16 @@
           <p class="text-muted mb-4">{{ place.formatted_address }}</p>
           <!-- <ng-icon name="heroMap" style="width: 25px; height: 25px;"></ng-icon> -->
         </a>
-      </div>    
-      <app-reviews-place [placeId]="placeId" [placeName]="place.name"></app-reviews-place>
+      </div>
+      <!-- Cocktail Reviews Section -->
+      <div class="cocktail-reviews mt-5">
+          <h3 class="text-center mb-4">Cocktails reviewed at this place</h3>
+          <app-button
+            class="mb-5"
+            label="Leave a review"
+            (clicked)="openAddReview(placeName)">
+          </app-button>
+      </div>
+      <app-reviews-grid [placeId]="placeId" [placeName]="place.name"></app-reviews-grid>
     </div>
   </div>

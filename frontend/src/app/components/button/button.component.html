@@ -1,0 +1,19 @@
+<div class="cta-buttons">
+  <!-- Se c'è link, usa <a> -->
+  <button
+    *ngIf="link"
+    [routerLink]="link"
+    class="cta-btn"
+    [class.disabled]="disabled || isLoading">
+    {{ isLoading ? loadingLabel : label }}
+  </button>
+
+  <!-- Altrimenti usa <button> -->
+  <button
+    *ngIf="!link"
+    class="cta-btn"
+    [disabled]="disabled || isLoading"
+    (click)="handleClick()">
+    {{ isLoading ? loadingLabel : label }}
+  </button>
+</div>

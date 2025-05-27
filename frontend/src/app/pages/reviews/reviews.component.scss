@@ -1,27 +1,42 @@
+
 .place-details {
-  padding: 1rem 0;
+  // padding-top: 100px;
   max-width: 600px;
   margin: 0 auto;
+  text-decoration: none!important;
+  
+  .photo-container {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    overflow: hidden;
+    height: 250px!important;
+    width: 250px!important;
+    
+  }
+  .photo-container img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    transition: opacity 0.2s;
+    border-radius: 20px;
+  }
+  
+  a {
+    text-decoration: none!important;
+  }
+
+  p {
+    background: linear-gradient(45deg, #d5710e, #dab603);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* necessario per WebKit */
+  }
 }
 
-.photo-container {
-  margin-bottom: 1rem;
-  min-height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  overflow: hidden;
-  max-width: 400px;
-}
-
-.photo-container img {
-  max-height: 250px;
-  width: 100%;
-  object-fit: cover;
-  transition: opacity 0.2s;
-  border-radius: 0.25rem;
-}
 
 .no-photo {
   display: flex;
@@ -32,26 +47,27 @@
   background-color: #e9ecef;
   color: #6c757d;
   font-size: 1.2rem;
-  border-radius: 0.25rem;
+  border-radius: 20px;
 }
 
 .cocktail-details {
-  padding: 1rem 0;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .cocktail-image-container {
   margin: 0 auto;
-  width: 100%;
-  max-width: 300px;
-  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cocktail-image {
-  max-height: 250px;
-  width: 100%;
+  height: 250px;
+  width: 250px;
   object-fit: cover;
+  transition: opacity 0.2s;
+  border-radius: 20px;
 }
 
 .reviews-section {

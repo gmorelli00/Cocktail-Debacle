@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';  // Importa FormsModule per il two
 import { NgIconsModule } from '@ng-icons/core';
 import { AuthService } from '../../services/auth.service';
 import { signal } from '@angular/core';
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
   selector: 'app-login-form',
-  imports: [CommonModule, FormsModule, NgIconsModule],  // Aggiungi FormsModule per il two-way data binding
+  imports: [CommonModule, FormsModule, NgIconsModule, ButtonComponent],  // Aggiungi FormsModule per il two-way data binding
   providers: [AuthService],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+  styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
   username: string = '';

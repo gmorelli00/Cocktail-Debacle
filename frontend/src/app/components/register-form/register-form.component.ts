@@ -4,13 +4,14 @@ import { NgIconsModule } from '@ng-icons/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'; // Assicurati che il percorso sia corretto
 import { signal } from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-register-form',
-  imports: [CommonModule, NgIconsModule, FormsModule],
+  imports: [CommonModule, NgIconsModule, FormsModule, ButtonComponent],
   providers: [AuthService],
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css']
+  styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent {
   username = '';
@@ -21,8 +22,8 @@ export class RegisterFormComponent {
   consentSuggestions = true;
   error = signal<string | null>(null);
 
-  acceptedTerms = false;
-  acceptedPrivacy = false;
+  acceptedTerms = true;
+  acceptedPrivacy = true;
 
   @Output() registerSuccess = new EventEmitter<boolean>();
   @Output() closeForm = new EventEmitter<void>();

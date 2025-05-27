@@ -1,4 +1,4 @@
-$cocktail-radius: 8px;
+$cocktail-radius: 20px;
 $cocktail-overlay-gradient: linear-gradient(
   to top,
   rgba(0, 0, 0, 0.9) 0%,
@@ -23,6 +23,7 @@ $cocktail-text-color: #fff;
   position: relative;
   overflow: hidden;
   border-radius: $cocktail-radius;
+  transition: transform 0.2s ease;
 
 
   &:hover {
