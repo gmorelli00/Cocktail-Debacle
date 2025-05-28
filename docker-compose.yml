@@ -6,6 +6,8 @@ services:
       POSTGRES_USER: ${DBUSERID}
       POSTGRES_PASSWORD: ${DBPASSWORD}
       POSTGRES_DB: ${DBDATABASE}
+    volumes:
+      - ./sqlserverdata:/var/opt/postgresql
     networks:
       - cocktail-net
     restart: always
