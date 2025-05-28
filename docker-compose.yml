@@ -17,7 +17,7 @@ services:
       - wwwroot:/app/wwwroot
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};Userame=${DBUSERID};Password=${DBPASSWORD};
+      - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};Username=${DBUSERID};Password=${DBPASSWORD};
       - Jwt__Key=${JWTKEY}
       - Jwt__Issuer=${JWTISSUER}
       - Jwt__Audience=${JWTAUDIENCE}
