@@ -42,7 +42,9 @@ services:
     restart: always
 
   nginx:
-    image: nginx:latest
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: nginx
     ports:
       - "8081:80"
