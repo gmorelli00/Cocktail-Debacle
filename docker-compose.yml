@@ -17,7 +17,7 @@ services:
       - wwwroot:/app/wwwroot
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};
+      - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};Userame=${DBUSERID};Password=${DBPASSWORD};
       - Jwt__Key=${JWTKEY}
       - Jwt__Issuer=${JWTISSUER}
       - Jwt__Audience=${JWTAUDIENCE}
@@ -30,7 +30,7 @@ services:
     networks:
       - cocktail-net
     restart: always
-    # Userame=${DBUSERID};Password=${DBPASSWORD};Encrypt=False;TrustServerCertificate=True
+    # Encrypt=False;TrustServerCertificate=True
 
   frontend:
     build:
