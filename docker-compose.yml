@@ -1,6 +1,6 @@
 services:
   db:
-    image: linuxserver/mssql-server-linux:latest
+    image: mcr.microsoft.com/azure-sql-edge:latest
     container_name: sqlserver
     environment:
       SA_PASSWORD: ${DBPASSWORD}
