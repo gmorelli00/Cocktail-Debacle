@@ -111,7 +111,7 @@ public class AuthController : ControllerBase
     public IActionResult GoogleLogin()
     {
         var clientId = _config["Authentication:Google:ClientId"];
-        var redirectUri = "http://localhost/api/auth/google-response";
+        var redirectUri = "https://debacle.gmorelli.app.sandoramix.dev/api/auth/google-response";
         var scope = "openid email profile";
         var state = Guid.NewGuid().ToString(); // opzionale: salva per sicurezza anti-CSRF
 
