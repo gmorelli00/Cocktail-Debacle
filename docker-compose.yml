@@ -16,7 +16,7 @@ services:
     build: ./backend
     container_name: backend
     volumes:
-      - wwwroot:/app/wwwroot
+      - wwwroot:/src/wwwroot
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};Username=${DBUSERID};Password=${DBPASSWORD};
@@ -53,7 +53,7 @@ services:
       dockerfile: nginx/Dockerfile
     container_name: nginx
     volumes:
-      - backend/wwwroot:/app/wwwroot
+      - wwwroot:/app/wwwroot
     ports:
       - "8081:80"
     depends_on:
