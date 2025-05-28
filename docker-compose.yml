@@ -1,7 +1,7 @@
 services:
   db:
-    image: mcr.microsoft.com/azure-sql-edge:latest
-    container_name: sqlserver
+    image: 
+    container_name: postgres:16-alpine
     environment:
       SA_PASSWORD: ${DBPASSWORD}
       ACCEPT_EULA: "Y"
