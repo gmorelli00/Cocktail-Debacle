@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Data;
 
 #nullable disable
@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250506183756_newMig")]
-    partial class newMig
+    [Migration("20250528135307_NewMig")]
+    partial class NewMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,26 +21,26 @@ namespace backend.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -53,18 +53,18 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -76,16 +76,16 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -97,10 +97,10 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -112,16 +112,16 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -131,19 +131,19 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("backend.Entities.CocktailReviewMetadata", b =>
                 {
                     b.Property<int>("PlaceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CocktailId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<double>("AverageScore")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ReviewCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("PlaceId", "CocktailId");
 
@@ -155,155 +155,155 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("backend.Entities.Cocktails", b =>
                 {
                     b.Property<string>("IdDrink")
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "idDrink");
 
                     b.Property<string>("StrAlcoholic")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strAlcoholic");
 
                     b.Property<string>("StrCategory")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strCategory");
 
                     b.Property<string>("StrDrink")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strDrink");
 
                     b.Property<string>("StrDrinkThumb")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strDrinkThumb");
 
                     b.Property<string>("StrGlass")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strGlass");
 
                     b.Property<string>("StrIngredient1")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient1");
 
                     b.Property<string>("StrIngredient10")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient10");
 
                     b.Property<string>("StrIngredient11")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient11");
 
                     b.Property<string>("StrIngredient12")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient12");
 
                     b.Property<string>("StrIngredient13")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient13");
 
                     b.Property<string>("StrIngredient14")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient14");
 
                     b.Property<string>("StrIngredient15")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient15");
 
                     b.Property<string>("StrIngredient2")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient2");
 
                     b.Property<string>("StrIngredient3")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient3");
 
                     b.Property<string>("StrIngredient4")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient4");
 
                     b.Property<string>("StrIngredient5")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient5");
 
                     b.Property<string>("StrIngredient6")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient6");
 
                     b.Property<string>("StrIngredient7")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient7");
 
                     b.Property<string>("StrIngredient8")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient8");
 
                     b.Property<string>("StrIngredient9")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strIngredient9");
 
                     b.Property<string>("StrInstructions")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strInstructions");
 
                     b.Property<string>("StrMeasure1")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure1");
 
                     b.Property<string>("StrMeasure10")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure10");
 
                     b.Property<string>("StrMeasure11")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure11");
 
                     b.Property<string>("StrMeasure12")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure12");
 
                     b.Property<string>("StrMeasure13")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure13");
 
                     b.Property<string>("StrMeasure14")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure14");
 
                     b.Property<string>("StrMeasure15")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure15");
 
                     b.Property<string>("StrMeasure2")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure2");
 
                     b.Property<string>("StrMeasure3")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure3");
 
                     b.Property<string>("StrMeasure4")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure4");
 
                     b.Property<string>("StrMeasure5")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure5");
 
                     b.Property<string>("StrMeasure6")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure6");
 
                     b.Property<string>("StrMeasure7")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure7");
 
                     b.Property<string>("StrMeasure8")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure8");
 
                     b.Property<string>("StrMeasure9")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "strMeasure9");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("IdDrink");
 
@@ -316,22 +316,22 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GooglePlaceId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<double?>("Latitude")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.Property<double?>("Longitude")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -342,28 +342,28 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CocktailId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("PlaceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<double>("Rating")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -380,28 +380,27 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -410,71 +409,71 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("ConsentData")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("ConsentSuggestions")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Provider")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -483,8 +482,7 @@ namespace backend.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -493,16 +491,16 @@ namespace backend.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CocktailId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

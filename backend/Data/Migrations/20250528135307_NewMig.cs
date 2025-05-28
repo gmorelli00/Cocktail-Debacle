@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace backend.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class newMig : Migration
+    public partial class NewMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +16,11 @@ namespace backend.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,27 +31,27 @@ namespace backend.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ConsentData = table.Column<bool>(type: "bit", nullable: false),
-                    ConsentSuggestions = table.Column<bool>(type: "bit", nullable: false),
-                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProviderId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ConsentData = table.Column<bool>(type: "boolean", nullable: false),
+                    ConsentSuggestions = table.Column<bool>(type: "boolean", nullable: false),
+                    Provider = table.Column<string>(type: "text", nullable: true),
+                    ProviderId = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,12 +62,12 @@ namespace backend.Data.Migrations
                 name: "Places",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GooglePlaceId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Latitude = table.Column<double>(type: "float", nullable: true),
-                    Longitude = table.Column<double>(type: "float", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GooglePlaceId = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Latitude = table.Column<double>(type: "double precision", nullable: true),
+                    Longitude = table.Column<double>(type: "double precision", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,11 +78,11 @@ namespace backend.Data.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleId = table.Column<int>(type: "integer", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,11 +99,11 @@ namespace backend.Data.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -119,10 +120,10 @@ namespace backend.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    ProviderKey = table.Column<string>(type: "text", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,8 +140,8 @@ namespace backend.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,10 +164,10 @@ namespace backend.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,44 +184,44 @@ namespace backend.Data.Migrations
                 name: "Cocktails",
                 columns: table => new
                 {
-                    IdDrink = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StrDrink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrAlcoholic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrGlass = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrInstructions = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrDrinkThumb = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient7 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient8 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient9 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient10 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient11 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient12 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient13 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient14 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrIngredient15 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure7 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure8 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure9 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure10 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure11 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure12 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure13 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure14 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StrMeasure15 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    IdDrink = table.Column<string>(type: "text", nullable: false),
+                    StrDrink = table.Column<string>(type: "text", nullable: true),
+                    StrCategory = table.Column<string>(type: "text", nullable: true),
+                    StrAlcoholic = table.Column<string>(type: "text", nullable: true),
+                    StrGlass = table.Column<string>(type: "text", nullable: true),
+                    StrInstructions = table.Column<string>(type: "text", nullable: true),
+                    StrDrinkThumb = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient1 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient2 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient3 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient4 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient5 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient6 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient7 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient8 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient9 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient10 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient11 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient12 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient13 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient14 = table.Column<string>(type: "text", nullable: true),
+                    StrIngredient15 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure1 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure2 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure3 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure4 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure5 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure6 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure7 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure8 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure9 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure10 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure11 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure12 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure13 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure14 = table.Column<string>(type: "text", nullable: true),
+                    StrMeasure15 = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -236,11 +237,11 @@ namespace backend.Data.Migrations
                 name: "CocktailReviewMetadatas",
                 columns: table => new
                 {
-                    CocktailId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlaceId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    AverageScore = table.Column<double>(type: "float", nullable: false),
-                    ReviewCount = table.Column<int>(type: "int", nullable: false)
+                    CocktailId = table.Column<string>(type: "text", nullable: false),
+                    PlaceId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    AverageScore = table.Column<double>(type: "double precision", nullable: false),
+                    ReviewCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,14 +264,14 @@ namespace backend.Data.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Rating = table.Column<double>(type: "float", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CocktailId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PlaceId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Rating = table.Column<double>(type: "double precision", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    CocktailId = table.Column<string>(type: "text", nullable: true),
+                    PlaceId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -299,10 +300,10 @@ namespace backend.Data.Migrations
                 name: "UserFavorites",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CocktailId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    CocktailId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -330,8 +331,7 @@ namespace backend.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -357,8 +357,7 @@ namespace backend.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CocktailReviewMetadatas_CocktailId",
