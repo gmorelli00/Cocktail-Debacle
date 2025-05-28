@@ -73,3 +73,18 @@ $cocktail-text-color: #fff;
   background-clip: text;
   color: transparent;
 }
+
+@media screen and (max-width: 768px) {
+  .cocktail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 250px;
+  }
+
+  .cocktail-card {
+    a.image-link {
+      img.cocktail-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+  }
+}

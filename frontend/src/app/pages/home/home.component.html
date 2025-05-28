@@ -22,10 +22,10 @@
 <div class="main-content">
 
   <!-- SEZIONE 1: discover cocktail -->
-  <div class="container-fluid discover-section">
+  <div class="container-fluid discover-section py-5 d-flex flex-column align-items-center justify-content-center text-center">
     <h2 class="discover-text">So many cocktails, discover them all!</h2>
-    <div class="row w-75">
-      <div class="col-8">
+    <div class="row d-flex justify-content-start popular-hero">
+      <div class="col-12">
         <h4 class="d-flex align-self-start">The most popular:</h4>
       </div>
     </div>
@@ -38,9 +38,9 @@
   </div>
 
   <!-- SEZIONE 2: bento grid dei locali -->
-  <section class="image-section">
-    <div class="overlay">
-      <h2 class="section-title">Find the best places to drink your favorite cocktails</h2>
+  <section class="image-section py-5 px-2 d-flex align-items-center justify-content-center">
+    <div class="overlay text-center">
+      <h2 class="section-title mb-4">Find the best places to drink your favorite cocktails</h2>
       <div class="bento-grid">
         <ng-container *ngFor="let place of places; let i = index">
 
@@ -81,7 +81,7 @@
     <div class="col-12 d-flex align-items-center justify-content-center flex-column">
       <h2>Join the comunity!</h2>
       <div class="cta-buttons pt-4">
-        <button class="cta-btn" (click)="toggleLoginForm()" >
+        <button class="cta-btn mb-5" (click)="toggleLoginForm()" >
           Register
         </button>
       </div>

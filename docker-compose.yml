@@ -5,8 +5,6 @@ services:
     environment:
       SA_PASSWORD: ${DBPASSWORD}
       ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
     volumes:
       - ./sqlserverdata:/var/opt/mssql
     networks:
@@ -16,8 +14,6 @@ services:
   backend:
     build: ./backend
     container_name: backend
-    ports:
-      - "5000:5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=${DBSERVER};Database=${DBDATABASE};User Id=${DBUSERID};Password=${DBPASSWORD};Encrypt=False;TrustServerCertificate=True
@@ -41,8 +37,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend
-    ports:
-      - "4200:4200"
     volumes:
       - ./frontend:/app
       - /app/node_modules

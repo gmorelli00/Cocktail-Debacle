@@ -127,15 +127,16 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-    border-radius: 10px;  // Arrotonda gli angoli dello sfondo
+    border-radius: 20px;  // Arrotonda gli angoli dello sfondo
   }
 }
 
 .carousel-image-container img {
   width: 200px;  // Imposta la larghezza dell'immagine al 100% della card
   height: 200px;
-  border-radius: 10px;  // Puoi aggiungere bordi arrotondati se lo desideri
+  border-radius: 20px;  // Puoi aggiungere bordi arrotondati se lo desideri
   object-fit: cover;
+
 }
 
 .carousel-image-container p {
@@ -171,3 +172,18 @@
   .arrow-right {
     transform: translateX(+20px);
   }
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    display: flex;
+    justify-content: start;
+    overflow-x: auto;
+  }
+
+  .carousel-slide:nth-child(1) {
+    margin-left: 30px;
+  }
+  .carousel-slide:nth-child(9) {
+    margin-right: 30px;
+  }
+}
