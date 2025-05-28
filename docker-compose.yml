@@ -53,7 +53,7 @@ services:
       dockerfile: nginx/Dockerfile
     container_name: nginx
     volumes:
-      - wwwroot:/app/wwwroot
+      - backend/wwwroot:/app/wwwroot
     ports:
       - "8081:80"
     depends_on:
