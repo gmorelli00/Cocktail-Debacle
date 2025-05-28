@@ -148,7 +148,7 @@ public class AuthController : ControllerBase
     {
         var clientId = _config["Authentication:Google:ClientId"] ?? throw new InvalidOperationException("ClientId non configurato");
         var clientSecret = _config["Authentication:Google:ClientSecret"] ?? throw new InvalidOperationException("ClientSecret non configurato");
-        var redirectUri = "http://localhost/api/auth/google-response";
+        var redirectUri = "https://debacle.gmorelli.app.sandoramix.dev/api/auth/google-response";
 
         var httpClient = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, "https://oauth2.googleapis.com/token")
