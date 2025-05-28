@@ -1,6 +1,6 @@
 services:
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest-arm64
+    image: linuxserver/mssql-server-linux:latest
     container_name: sqlserver
     environment:
       SA_PASSWORD: ${DBPASSWORD}
