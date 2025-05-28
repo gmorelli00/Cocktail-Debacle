@@ -52,7 +52,7 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "8081:80"
     volumes:
       - ./backend/wwwroot:/app/wwwroot
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
