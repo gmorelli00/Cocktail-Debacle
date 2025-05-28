@@ -64,7 +64,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "proxy.conf.json",
-            "allowedHosts": ["*"]
+            "allowedHosts": ["*", "debacle.gmorelli.app.sandoramix.dev"]
           },
           "configurations": {
             "production": {
