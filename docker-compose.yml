@@ -1,23 +1,13 @@
 services:
   db:
-    build:
-      context: db
-      dockerfile: Dockerfile
-    healthcheck:
-      test: ["CMD-SHELL", 'sqlcmd -U sa -d master -Q "SELECT 1" || exit 1']
-      interval: 10s
-      timeout: 3s
-      retries: 30
-      start_period: 10s
-    volumes:
-      - sqlserverdata:/var/opt/mssql
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: sqlserver
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=${DBPASSWORD}
-      - MSSQL_PID=Developer
-      - MSSQL_USER=${DBUSERID}
-      - MSSQL_PASSWORD=${DBPASSWORD}
-      - SQLCMDPASSWORD=${DBPASSWORD}
+      SA_PASSWORD: ${DBPASSWORD}
+      ACCEPT_EULA: "Y"
+    networks:
+      - cocktail-net
+    restart: always
 
   backend:
     build: ./backend
@@ -35,8 +25,7 @@ services:
       - GOOGLE_MAPS_API_KEY=${GOOGLEAPIKEY}
     working_dir: /src
     depends_on:
-      db: 
-        condition: service_healthy
+      - db
     networks:
       - cocktail-net
     restart: always
