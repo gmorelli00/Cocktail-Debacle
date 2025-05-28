@@ -1,12 +1,11 @@
 services:
   db:
-    image: mcr.microsoft.com/azure-sql-edge
-    container_name: sqlserver
+    image: postgres:latest
+    container_name: postgres
     environment:
-      SA_PASSWORD: ${DBPASSWORD}
-      ACCEPT_EULA: "Y"
-    volumes:
-      - ./db/mssql.conf:/var/opt/mssql/mssql.conf
+      POSTGRES_USER: ${DBUSERID}
+      POSTGRES_PASSWORD: ${DBPASSWORD}
+      POSTGRES_DB: ${DBDATABASE}
     networks:
       - cocktail-net
     restart: always
@@ -18,7 +17,7 @@ services:
       - wwwroot:/app/wwwroot
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=${DBSERVER};Database=${DBDATABASE};User Id=${DBUSERID};Password=${DBPASSWORD};Encrypt=False;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Host=${DBSERVER};Port=${DBPORT};Database=${DBDATABASE};
       - Jwt__Key=${JWTKEY}
       - Jwt__Issuer=${JWTISSUER}
       - Jwt__Audience=${JWTAUDIENCE}
@@ -31,6 +30,7 @@ services:
     networks:
       - cocktail-net
     restart: always
+    # Userame=${DBUSERID};Password=${DBPASSWORD};Encrypt=False;TrustServerCertificate=True
 
   frontend:
     build:

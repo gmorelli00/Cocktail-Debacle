@@ -32,7 +32,7 @@ builder.Services.AddHttpClient(); // Per HttpClient injection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDbContext>()
