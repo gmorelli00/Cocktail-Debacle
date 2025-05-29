@@ -211,6 +211,9 @@ export class ReviewsComponent implements OnInit {
   openAddReview(placeName: string, cocktailName: string): void {
     this.reviewService.setPlaceName(placeName);
     this.reviewService.setCocktailName(cocktailName);
+    
+    this.reviewService.setPlaceResult(this.place);
+    this.reviewService.setCocktail(this.cocktail);
     this.reviewService.toggle();
   }
   

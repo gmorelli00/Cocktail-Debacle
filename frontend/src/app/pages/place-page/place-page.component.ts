@@ -66,6 +66,7 @@ export class PlacePageComponent implements OnInit {
   
   openAddReview(placeName: string): void {
     this.reviewService.setPlaceName(placeName);
+    this.reviewService.setPlaceResult(this.place);
     this.reviewService.toggle();
   }
 

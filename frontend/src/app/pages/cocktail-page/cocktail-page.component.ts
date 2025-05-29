@@ -58,6 +58,7 @@ export class CocktailPageComponent implements OnInit {
 
   openAddReview(cocktailName: string): void {
     this.reviewService.setCocktailName(cocktailName);
+    this.reviewService.setCocktail(this.cocktail);
     this.reviewService.toggle();
   }
 

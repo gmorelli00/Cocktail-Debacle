@@ -80,6 +80,17 @@ export class AddReviewComponent implements OnInit {
     // Set up debounced place search
     this.placeName = this.reviewService.getPlaceName();
     this.cocktailName = this.reviewService.getCocktailName();
+
+    
+    this.selectedPlace = this.reviewService.getPlaceResult();
+    if (this.selectedPlace) {
+      this.selectPlace(this.selectedPlace);
+    }
+    this.selectedCocktail = this.reviewService.getCocktail();
+    if (this.selectedCocktail) {
+      this.selectCocktail(this.selectedCocktail);
+    }
+
     this.placeSearchQuerySubject.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -307,6 +318,7 @@ export class AddReviewComponent implements OnInit {
       next: (response) => {
         this.submittingReview = false;
         this.reviewSuccess = true;
+        this.reviewService.setNull();
 
         // Navigate to the review page after successful submission
         setTimeout(() => {
@@ -332,6 +344,7 @@ export class AddReviewComponent implements OnInit {
   }
 
   closeAddReview() {
+    this.reviewService.setNull();
     this.closeForm.emit();
     this.reviewService.close();
   }
