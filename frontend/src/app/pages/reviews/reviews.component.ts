@@ -90,6 +90,13 @@ export class ReviewsComponent implements OnInit {
     this.authService.userInfo$.subscribe(user => {
       this.currentUser = user;
     });
+    if (!this.currentUser) {
+      this.authService.getUserInfo().subscribe(user => {
+        this.currentUser = user;
+      });
+    }
+
+    console.log('currentUser:', this.currentUser);
   
     this.route.paramMap.subscribe(params => {
       const placeId = params.get('placeId');
