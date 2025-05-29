@@ -93,8 +93,12 @@ export class AddCocktailComponent {
   onSubmit() {
     if (this.form.invalid) return;
     if (this.isAuthenticated === false) {
-      this.authModalService.open();
-      return;
+      this.authService.isLoggedIn().subscribe((isLoggedIn: boolean) => {
+      this.isAuthenticated = isLoggedIn;
+      if (this.isAuthenticated === false)
+        this.authModalService.open();
+        return;
+      });
     }
   
     this.loading = true;
@@ -126,9 +130,14 @@ export class AddCocktailComponent {
         return this.cocktailService.createCocktail(dto);
       })
     ).subscribe({
-      next: () => {
+      next: newCocktail => {
         this.loading = false;
         alert('Cocktail aggiunto!');
+        const id = newCocktail.idDrink;
+        console.log('Nuovo cocktail creato:', newCocktail);
+        setTimeout(() => {
+          this.router.navigate(['/cocktail', id]);
+        }, 1000);
       },
       error: () => {
         this.loading = false;
