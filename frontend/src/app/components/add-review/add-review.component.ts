@@ -99,7 +99,7 @@ export class AddReviewComponent implements OnInit {
     });
 
     // Initial nearby places search
-    this.searchNearbyPlaces();
+    // this.searchNearbyPlaces();
     
     // Load all cocktails
     this.loadAllCocktails();
@@ -111,10 +111,10 @@ export class AddReviewComponent implements OnInit {
   }
 
   searchPlaces(query: string): void {
-    if (!query.trim()) {
-      this.searchNearbyPlaces();
-      return;
-    }
+    // if (!query.trim()) {
+    //   this.searchNearbyPlaces();
+    //   return;
+    // }
 
     this.placeSearching = true;
     this.placeSearchError = false;
@@ -213,26 +213,6 @@ export class AddReviewComponent implements OnInit {
     }
   
     this.placeSearchResults = [];
-  }
-  
-
-  loadPlacePhoto(place: PlaceResult): void {
-    if (place.photos && place.photos.length > 0) {
-      const photoRef = place.photos[0].photo_reference;
-      
-      this.placeService.getPlacePhoto(photoRef, 400).subscribe({
-        next: (blob) => {
-          const objectURL = URL.createObjectURL(blob);
-          this.placePhotoUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        },
-        error: (error) => {
-          console.error('Error loading place photo:', error);
-          this.placePhotoUrl = null;
-        }
-      });
-    } else {
-      this.placePhotoUrl = null;
-    }
   }
 
   // Cocktail search methods
