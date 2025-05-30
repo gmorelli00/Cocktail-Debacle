@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import {PlaceResult} from './place.service';
 
 
 export interface CocktailReviewMetadata {
@@ -56,6 +57,11 @@ export class ReviewService {
 
   private cocktailName = new BehaviorSubject<string>('');
   private placeName = new BehaviorSubject<string>('');
+
+  private PlaceResult = new BehaviorSubject<PlaceResult | null>(null);
+  placeResult$ = this.PlaceResult.asObservable();
+  private cocktailResult = new BehaviorSubject<any | null>(null);
+  cocktailresult$ = this.cocktailResult.asObservable();
   
   reviewModal$ = this._reviewModal$.asObservable();
   cocktailName$ = this.cocktailName.asObservable();
@@ -130,6 +136,30 @@ export class ReviewService {
   open()  { this._reviewModal$.next(true); }
   close() { this._reviewModal$.next(false); }
   toggle() { this._reviewModal$.next(!this._reviewModal$.value); }
+
+  setNull(): void {
+    this.PlaceResult.next(null);
+    this.cocktailResult.next(null);
+    this.cocktailName.next('');
+    this.placeName.next('');
+  }
+
+  setPlaceResult(place: PlaceResult | null): void {
+    this.PlaceResult.next(place);
+  }
+
+  getPlaceResult(): PlaceResult | null {
+    return this.PlaceResult.value;
+  }
+
+  setCocktail(cocktail: any | null): void {
+    this.cocktailResult.next(cocktail);
+  }
+
+  getCocktail(): any | null {
+    return this.cocktailResult.value;
+  }
+
 
   setCocktailName(name: string): void {
     this.cocktailName.next(name);

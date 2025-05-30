@@ -185,7 +185,7 @@ public class CocktailsController : ControllerBase
             await file.CopyToAsync(stream);
         }
 
-        var fileUrl = $"{Request.Scheme}://{Request.Host}:8081/uploads/{fileName}";
+        var fileUrl = $"{Request.Scheme}://{Request.Host}/uploads/{fileName}";
         return Ok(new { url = fileUrl });
     }
 
