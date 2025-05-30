@@ -1,4 +1,4 @@
-@use './styles/variables' as *;
+@use './styles/_variables' as *;
 
 html, body, app-root {
   height: 100%;
@@ -6,7 +6,7 @@ html, body, app-root {
   position: relative;
   box-sizing: border-box;
   display: block;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 body {

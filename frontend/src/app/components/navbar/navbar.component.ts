@@ -27,8 +27,7 @@ import { ReviewService } from '../../services/review.service';
     UserImageComponent, // Aggiungi il componente UserImage
     NgbTooltip,
     AddReviewComponent
-],
-  providers: [AuthService],
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

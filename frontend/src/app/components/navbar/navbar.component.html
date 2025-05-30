@@ -50,7 +50,7 @@
     </div>
 
     <!-- Icona Aggiungi Drink -->
-    <div class="col d-flex align-items-center">
+    <div class="col d-flex align-items-center add-cocktail-icon">
       <button class="btn border-0 shadow-none mt-4 m-auto" #addCocktailTooltip="ngbTooltip" ngbTooltip="Add cocktail" placement="right" (click)="hideTooltipAndNavigate(addCocktailTooltip, '/add-cocktail')">
         <ng-icon [name]="isAddCocktail ? 'heroPlusCircleSolid' : 'heroPlusCircle'" class="text-green-500" style="width: 30px; height: 30px"></ng-icon>
       </button>
@@ -59,8 +59,8 @@
 
 
   <!-- Bottom Navbar -->
-  <div id="navbarSupportedContent" class="bottom-navbar row d-flex flex-column justify-content-end">
-    <div class="col d-flex justify-content-center align-items-end">
+  <div id="navbarSupportedContent" class="row d-flex flex-column justify-content-end">
+    <div class="user col d-flex justify-content-center align-items-end">
   
     <!-- Icona utente (se autenticato) -->
       <div *ngIf="isAuthenticated" class="dropdown dropend">

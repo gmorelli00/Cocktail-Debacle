@@ -88,3 +88,16 @@
 .user-profile-link:hover {
   background-color: rgba(0, 123, 255, 0.1);
 }
+
+
+@media screen and (max-width: 768px) {
+  .cocktail-info {
+    flex-direction: column!important;
+  }
+  .cocktail-instructions {
+    flex-direction: column!important;
+  }
+  .cocktail-ingridients {
+    flex-direction: column!important;  
+  }
+}

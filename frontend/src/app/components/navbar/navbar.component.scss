@@ -1,5 +1,6 @@
 /* Overlay che copre tutta la pagina */
 .navbar {
+  position: fixed;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #f0f0f5;
@@ -79,29 +80,28 @@
 
 @media screen and (max-width: 768px) {
   .navbar {
+    position: fixed!important;
     max-width: 100%;
-    height: auto;
     height: 70px!important;
     top: auto!important;
     bottom: 0!important;
     left: 0!important;
     right: 0!important;
-    padding: auto;
+    padding: 0!important;
     margin: 0!important;
     flex-direction: row!important;
-    align-items: center;
     display: flex!important;
-    justify-content:center!important;
+    justify-content:space-between!important;
     flex-wrap: nowrap;
     box-sizing: border-box!important;
     box-shadow: 0 -4px 20px -10px rgba(0, 0, 0, 0.1)!important;
     .row {
       flex-direction: row!important;
-      width: fit-content!important;
+      min-width: 100%!important;
       margin: 0!important;
-      box-sizing: border-box!important;
+      box-sizing: content-box!important;
       .col {
-        padding: auto!important;
+        padding: 0!important;
         margin: 0!important;
         justify-content: center!important;
         @media (min-width: 769px) {
@@ -111,8 +111,9 @@
         }
       }
     }
+
     .logo,
-    .home-icon {
+    .user {
       display: none!important;
     }
 

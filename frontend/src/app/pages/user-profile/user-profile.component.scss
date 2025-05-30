@@ -1,6 +1,5 @@
 .profile-container {
     max-width: 900px;
-    margin-top: 80px;
   }
   
 .clickable {
@@ -54,5 +53,17 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .instagram-tabs {
+    width: 100%;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+  }
 
+  // .cocktail-grid {
+  //   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))!important; // 3 colonne
+  // }
   
+}

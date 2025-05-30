@@ -102,6 +102,29 @@
   }
 }
 
+.dropdown-menu {
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+}
+
+.dropdown-item {
+  background-color: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    background-color: #292727bc;
+  }
+  &:active {
+    background-color: #292727;
+  }
+}
+
 @media (min-width: 769px)
 {  
   .search-bar {

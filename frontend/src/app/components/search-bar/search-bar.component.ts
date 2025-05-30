@@ -7,24 +7,36 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PlaceService } from '../../services/place.service';
 import { NgIconsModule } from '@ng-icons/core';
+import { UserImageComponent } from '../user-image/user-image.component';
+import { AuthModalService } from '../../services/auth-modal.service';
+import { AuthService } from '../../services/auth.service';
+import { LoginFormComponent } from '../login-form/login-form.component';
+import { RegisterFormComponent } from '../register-form/register-form.component';
+
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, CommonModule,  NgIconsModule, RouterModule],
+  imports: [FormsModule, CommonModule,  NgIconsModule, RouterModule, UserImageComponent, LoginFormComponent, RegisterFormComponent],
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
   isOnDiscoverSection: boolean = false;
-  isCollapsed: boolean = true; // I filtri sono nascosti di default
+  isCollapsed: boolean = true;
   searchQuery = '';
   selectedCategory = '';
   selectedIngredient = '';
   selectedGlass = '';
-  selectedMode: 'cocktails' | 'places' = 'cocktails'; // Modalità di ricerca
+  selectedMode: 'cocktails' | 'places' = 'cocktails';
   isScrolled = false;
   isHome = false;
+
+  isAuthenticated = false;
+  showDropdown = false;
+  showLoginForm = false;
+  showRegisterForm = false;
+  currentUsername = '';
 
   categories: string[] = [];
   ingredients: string[] = [];
@@ -34,7 +46,9 @@ export class SearchBarComponent implements OnInit {
     private cocktailService: CocktailService,
     private searchService: SearchService,
     private router: Router,
-    private placeService: PlaceService
+    private placeService: PlaceService,
+    public authModalService: AuthModalService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -49,6 +63,15 @@ export class SearchBarComponent implements OnInit {
     this.loadCategories();
     this.loadIngredients();
     this.loadGlasses();
+    this.authService.userInfo$.subscribe((userInfo) => {
+      this.isAuthenticated = !!userInfo;
+      if (userInfo) {
+        this.currentUsername = userInfo.username;
+      }
+    });
+    
+    // Nel caso in cui entri nella pagina già loggato
+    this.authService.fetchUserInfoIfLoggedIn();
   }
 
   private updateModeBasedOnRoute(): void {
@@ -172,5 +195,51 @@ export class SearchBarComponent implements OnInit {
   private resetScrollState(): void {
   this.isScrolled = false;
   this.isOnDiscoverSection = false;
-}
+  }
+
+  navigateToProfile() {
+    if (this.currentUsername) {
+      this.router.navigate(['/profile', this.currentUsername]);
+      this.showDropdown = false;
+    }
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isAuthenticated = false;  // Imposta lo stato di autenticazione su falso
+        this.showDropdown = false;    // Nasconde il dropdown
+        this.router.navigateByUrl('/').then(() => {
+          window.location.reload();
+        });
+        console.log('Logout riuscito');
+      },
+      error: () => {
+        console.error('Errore durante il logout');
+      }
+    });
+  }
+
+  toggleLoginForm() {
+    this.authModalService.toggle()
+    this.showLoginForm = !this.showLoginForm;
+    this.showRegisterForm = false;
+  }
+
+  onLoginSuccess() {
+    this.isAuthenticated = true;
+    this.authService.fetchUserInfoIfLoggedIn(); // 👈 forza la fetch anche qui
+    this.showLoginForm = false;
+    this.authModalService.close();
+  }
+
+  onRegisterSuccess() {
+    this.isAuthenticated = true;
+    this.authService.fetchUserInfoIfLoggedIn(); // 👈 forza la fetc
+    this.showRegisterForm = false;
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
 }

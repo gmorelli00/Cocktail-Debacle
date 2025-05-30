@@ -5,7 +5,7 @@
   style="z-index: 20;">
 
   <div class="row w-100">
-    <div class="col-2 d-flex justify-content-center align-items-center logo">
+    <!-- <div class="col-2 d-flex justify-content-center align-items-center logo">
       <a [routerLink]="['/']">
         <img
           src="/assets/logo-no-back.svg"
@@ -14,7 +14,7 @@
           width="50px"
         />
       </a>
-    </div>
+    </div> -->
     <div class="search-bar col-10 d-flex justify-content-center align-items-center">
       <div class="input-group">
         <!-- Bottone Switch Modalità -->
@@ -98,6 +98,48 @@
               {{ glass }}
             </option>
           </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 d-flex justify-content-center align-items-center logo">
+      <div class="user col d-flex justify-content-center align-items-end">
+    
+      <!-- Icona utente (se autenticato) -->
+        <div *ngIf="isAuthenticated" class="dropdown dropend">
+          <button class="btn p-0 border-0 shadow-none" [class.show]="showDropdown" (click)="toggleDropdown();" type="button" aria-expanded="false"placement="right">
+            <app-user-image>
+            </app-user-image>
+          </button>
+        
+          <ul class="dropdown-menu show" [ngStyle]="{ display: showDropdown ? 'block' : 'none', bottom: '-120px', right: '10%' }" style="position: absolute;">
+            <li><a class="dropdown-item" (click)="navigateToProfile()">Profile</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/settings'">Settings</a></li>
+            <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+          </ul>
+        </div>
+
+        <!-- Icona utente (se non autenticato) -->
+        <div *ngIf="!isAuthenticated">
+          <button (click)="toggleLoginForm();" class="btn p-0 border-0 shadow-none" placement="right">
+            <ng-icon name="heroUserCircle" class="text-green-500" style="width: 40px; height: 40px"></ng-icon>
+          </button>
+        </div>
+        <!-- Overlay per il login -->
+        <div *ngIf="authModalService.loginModal$ | async" class="overlay" (click)="toggleLoginForm()">
+          <div class="card position-relative" (click)="$event.stopPropagation()">
+            <app-login-form 
+              *ngIf="!showRegisterForm"
+              (loginSuccess)="onLoginSuccess()" 
+              (closeForm)="toggleLoginForm()"
+              (switchToRegister)="showRegisterForm = true">
+            </app-login-form>
+            <app-register-form
+              *ngIf="showRegisterForm"
+              (registerSuccess)="onRegisterSuccess()"
+              (closeForm)="toggleLoginForm()"
+              (switchToLogin)="showRegisterForm = false">
+            </app-register-form>
+          </div>
         </div>
       </div>
     </div>

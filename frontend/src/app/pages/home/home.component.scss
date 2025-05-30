@@ -1,53 +1,37 @@
+@use 'variables' as *;
+
+.parallax-container {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .home-container {
-  position: fixed;
+  position: relative;
+
+  // -----
+
+  background-image: url('/assets/images/spritz.png'), url('/assets/images/lime.png');
+  background-attachment: fixed, fixed;
+  background-position: 10% 80%, 90% 20%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 400px auto, 400px auto;
+  transition: all 0.3s ease;
+
+  // -----
+
+  z-index: 0;
   height: 80vh;
-  width: calc(100% - 80px);
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 
+
   .text-shadow {
-    text-shadow: 2px 2px 8px #fff;
+    width: 50%;
   }
 
-  .heroImage1, .heroImage2 {
-    position: absolute;
-    object-fit: cover;
-    overflow: visible;
-    z-index: -1;
-    transition: all 0.3s ease;
-    width: 30vw;
-    height: 30vh;
-    @media (min-width: 768px) {
-      width: 30vw;
-      height: 30vh;
-    }
-  
-    @media (min-width: 1200px) {
-      width: 30vw;
-      height: 30vh;
-    }
-  }
-  
-  .heroImage1 {
-    bottom: 20px;
-    left: 30px;
-    @media (min-width: 768px) {
-      bottom: 30px;
-      left: 20px;
-    }
-  }
-  
-  .heroImage2 {
-    top: 20px;
-    right: 20px;
-    @media (min-width: 768px) {
-      top: 20px;
-      right: 20px;
-    }
-  }
 
   .home-title {
     font-size: 2.5rem;
@@ -64,34 +48,21 @@
     color: transparent;
   }
   
+
   
-
-  .scroll-arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    animation: bounce 2s infinite;
-    color: #292727;
-    cursor: default;
-  }
-
-  &.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-  }
 }
 
 .main-content {
-  background-color: #ebebe9;
+  position: relative;
+  // margin-top: 80vh;
+  z-index: 0;
+  background-color: transparent;
   
   .discover-section {
     position: relative;
     height: 100%;
     width: 100%;
-    margin-top: 88vh;
+    // margin-top: 88vh;
     background-color: #ebebe9;
     z-index: 2;
     
@@ -251,17 +222,32 @@
     }
   }
 }
-  
-  .app-carousel
-  {
-    width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
-  }
+
+
+.app-carousel
+{
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
 
 @media screen and (max-width: 768px) {
+  .parallax-container {
+    width: 100%;
+    overflow-x: hidden;
+  }
   .home-container {
     width: 100%!important;
+
+    background-image: url('/assets/images/spritz.png'), url('/assets/images/lime.png');
+    background-attachment: fixed, fixed;
+    background-position: 10% 80%, 90% 20%;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 200px auto, 200px auto;
+
+    .text-shadow {
+      width: 100%;
+    }
   }
   .main-content {
     width: 100%!important;
@@ -282,73 +268,75 @@
       background-color: #ebebe9;
       z-index: 1;
     
-    .section-title {
-      color: #292727;
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 30px; /* Aggiunto margine per separare dal bento */
-      animation: fadeIn 1s ease-in;
-    }
-    
-    .bento-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+      .section-title {
+        color: #292727;
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px; /* Aggiunto margine per separare dal bento */
+        animation: fadeIn 1s ease-in;
+      }
+      
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-    /* Adatta le card se necessario */
-    .bento-box {
-      grid-column: span 1 !important;
-      
-      &:nth-child(1) {
-        order: 1;
-        grid-column: span 2 !important;
-        grid-row: span 25; 
-      }
-      
-      &:nth-child(2) {
-        order: 2;
-        grid-column: span 1;
-        grid-row: span 50;
-      }
-      
-      &:nth-child(3) {
-        order: 4;
-        grid-column: span 1;
-        grid-row: span 30;
-      }
-      
-      &:nth-child(4) {
-        order: 3;
-        grid-column: span 1;
-        grid-row: span 25;
-      }
-      
-      &:nth-child(5) {
-        order: 5;
-        grid-column: span 1;
-        grid-row: span 25;
-      }
-      
-      &:nth-child(6) {
-        order: 6;
-        grid-column: span 1;
-        grid-row: span 20;
+      /* Adatta le card se necessario */
+      .bento-box {
+        grid-column: span 1 !important;
+        
+        &:nth-child(1) {
+          order: 1;
+          grid-column: span 2 !important;
+          grid-row: span 25; 
+        }
+        
+        &:nth-child(2) {
+          order: 2;
+          grid-column: span 1;
+          grid-row: span 50;
+        }
+        
+        &:nth-child(3) {
+          order: 4;
+          grid-column: span 1;
+          grid-row: span 30;
+        }
+        
+        &:nth-child(4) {
+          order: 3;
+          grid-column: span 1;
+          grid-row: span 25;
+        }
+        
+        &:nth-child(5) {
+          order: 5;
+          grid-column: span 1;
+          grid-row: span 25;
+        }
+        
+        &:nth-child(6) {
+          order: 6;
+          grid-column: span 1;
+          grid-row: span 20;
+        }
       }
     }
   }
-}
-
-  
+  .fixed-container{
+    left: 0!important;
+    padding-right: 0!important;
+  }
 }
 
 .cta-buttons {
   margin-top: 20px;
-  display: flex;
   gap: 15px;
-  justify-content: center;
   z-index: 2;
 
-  .cta-btn {
+  // transform: translateX(-190px);
+
+  .cta-btn, .cta-btn {
     width: 190px;
     padding: 12px 24px;
     font-size: 1rem;
@@ -357,6 +345,7 @@
     border: none;
     border-radius: 30px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    pointer-events: auto;
     cursor: pointer;
 
     &:hover {
@@ -369,3 +358,24 @@
   }
 }
 
+.fixed-container {
+  position: fixed;
+  left: $navbar-width;
+  right: 0%;
+  max-width: 100%;
+  padding-right: 1rem;
+  pointer-events: none;
+}
+
+@media (max-width: 1400px) {
+  .home-container {
+    background-size: 300px auto, 300px auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-container {
+
+    background-size: 200px auto, 200px auto;
+  }
+}
