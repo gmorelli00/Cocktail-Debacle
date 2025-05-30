@@ -55,7 +55,7 @@ services:
     volumes:
       - wwwroot:/app/wwwroot
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - frontend
       - backend
