@@ -34,8 +34,8 @@ export class CocktailsGridComponent implements OnInit, OnDestroy {
   loading = false;
   errorMessage = '';
   currentIndex = 0;
-  pageSize = 30;
-  scrollDistance = 3;  // Scrolla quando è alla fine
+  pageSize = 1000;
+  scrollDistance = 20;  // Scrolla quando è alla fine
   scrollUpDistance = 2;  // Triggera lo scroll anche quando si ritorna verso l'alto
 
   private searchSub!: Subscription;

@@ -25,7 +25,7 @@ export class PlacesComponent implements OnInit, OnDestroy {
   displayedNearbyPlaces: PlaceResult[] = [];
   displayedSearchPlaces: PlaceResult[] = [];
   searchPlacesCurrentIndex = 0;
-  searchPlacesPageSize = 10;
+  searchPlacesPageSize = 20;
   nearbyPlacesCurrentIndex = 0;
   nearbyPlacesPageSize = 10;
   isLoadingNearby = false;
